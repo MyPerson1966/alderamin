@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -189,16 +190,20 @@
                 
             </p:dataTable>
     
-    <p:contextMenu for=":TelescopeTableForm" style="width: 550px; font-size: 10px;">
-        <p:menuitem value="Delete Selected Telescope  " update="deselectTelescope TelescopeTable :TelescopeMaskTableForm   :msgForm:msgsInfo"
-		    icon="ui-icon-close" 
-		    actionListener="#{telescopeController.removeRow(false)}"  />
-        <p:menuitem value="Delete All Telescopes" update="TelescopeTable :TelescopeMaskTableForm    :msgForm:msgsInfo"
-		    icon="ui-icon-close" actionListener="#{telescopeController.removeRow(true)}" />
-    </p:contextMenu>
+	    
+	    
+	    
             
         </h:form>
         
+	<ezcomp:popUpRemoveMenu
+		removeMethodSelected="#{telescopeController.removeRow(false)}"
+		removeMethodAll="#{telescopeController.removeRow(true)}"
+		delAllCaption="Delete All Telescope "
+		delSelectedCaption="Delete Selected Telescope "
+		targetFor=":TelescopeTableForm" targetUpdate=":TelescopeTableForm:TelescopeTable :TelescopeMaskTableForm    :msgForm:msgsInfo"
+		/>
+	    
     </h:body>
 </html>
 

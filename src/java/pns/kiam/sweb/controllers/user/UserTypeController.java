@@ -135,4 +135,28 @@ public class UserTypeController extends AbstractController implements Serializab
     public void rowDeSelect() {
 	userType = null;
     }
+
+    public void removeRow(boolean all) {
+	System.out.println("    REMOVE ALL " + all);
+	if (all) {
+	    deleteUserType();
+	} else {
+	    if (userType != null) {
+		deleteUserType(userType.getId());
+	    }
+	}
+	init();
+    }
+
+    private void deleteUserType(long id) {
+	UserType uTmp = em.find(UserType.class, id);
+	em.remove(uTmp);
+    }
+
+    private void deleteUserType() {
+	for (int k = 0; k < userTypeList.size(); k++) {
+	    UserType tmp = userTypeList.get(k);
+	    deleteUserType(tmp.getId());
+	}
+    }
 }

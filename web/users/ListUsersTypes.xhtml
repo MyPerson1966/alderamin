@@ -108,19 +108,16 @@
 	    
 	</p:dataTable>
 	    
-	    
-	    
-    
-    <p:contextMenu for=":UserTypeTableForm" style="width: 550px; font-size: 10px;">
-        <p:menuitem value="Delete Selected Telescope  " update="UserTypeTable     :msgForm:msgsInfo"
-		    icon="ui-icon-close" 
-		    actionListener="#{telescopeController.removeRow(false)}"  />
-        <p:menuitem value="Delete All Telescopes" update="UserTypeTable   :msgForm:msgsInfo"
-		    icon="ui-icon-close" actionListener="#{telescopeController.removeRow(true)}" />
-    </p:contextMenu>
-	    
+	
 	</h:form>
 	
+	    <ezcomp:popUpRemoveMenu 
+		removeMethodSelected="#{userTypeController.removeRow(false)}"
+		removeMethodAll="#{userTypeController.removeRow(true)}"
+		delAllCaption="Delete All Types"
+		delSelectedCaption="Delete Selected Types"
+		targetFor=":UserTypeTableForm" targetUpdate=":UserTypeTableForm:UserTypeTable     :msgForm:msgsInfo"
+		/>
     </h:body>
 </html>
 
