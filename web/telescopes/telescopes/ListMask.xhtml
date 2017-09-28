@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+	
+	
+	<h:form id="TelescopeMaskTableForm">
+	    <p:commandButton id="createBTN" value="Create Mask" 
+			     disabled="#{(telescopeMaskController.telescope==null )  || ( telescopeMaskController.editModeActive )}" >
+		<p:ajax event="click" listener="#{telescopeMaskController.prepareCreate()}" update="@form :TelescopeMaskTableForm:msgsTelescopesMask" />
+	    </p:commandButton>
+	    <p:commandButton id="deselectBTN" value="Deselect Mask" 
+			     disabled="#{(telescopeMaskController.horizontMask==null )}" >
+		<p:ajax event="click" listener="#{telescopeMaskController.rowDeSelect()}" update="@form :TelescopeMaskTableForm:msgsTelescopesMask" />
+	    </p:commandButton>
+	    
+	    <p:growl id="msgsTelescopesMask" showDetail="true" life="900" />
+
+            
+	    <c:if  test="#{telescopeMaskController.telescope.telescopeMask.size()>0}">
+	    <p:dataTable id="TelescopeMaskTable" widgetVar="TelescopeMaskTable"
+			 value="#{telescopeMaskController.telescope.telescopeMask}" var="tm"
+                         rows="12" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" 
+			 editable="true" 
+			 >
+		
+		<p:ajax event="rowEdit" listener="#{telescopeMaskController.onRowEdit}"
+			update=":TelescopeMaskTableForm:createBTN :TelescopeMaskTableForm:msgsTelescopesMask" />
+		
+		
+                
+                <f:facet name="header">
+                    TELESCOPE MASK FOR #{telescopeMaskController.telescope.identifier}
+                </f:facet>
+                <p:column style="width: 23px;background: #ffffcc">
+                    <p:rowEditor  />
+                </p:column>
+		
+                <p:column headerText="HORIZONT" >
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText   value="#{tm.horizont}" /></f:facet>
+                        <f:facet name="input">
+			    <h:selectOneMenu id="horiz" value="#{tm.horizont}" style="width:100%">
+                                    <f:selectItems value="#{telescopeMaskController.horizontRange}" var="hor" itemLabel="#{hor}" itemValue="#{hor}" />
+                            </h:selectOneMenu>
+			</f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="ANGLE">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{tm.angle}" /></f:facet>
+                        <f:facet name="input">
+			    <h:selectOneMenu value="#{tm.angle}" style="width:100%">
+				<f:selectItems value="#{telescopeMaskController.angleRange}" var="ang" itemLabel="#{ang}" itemValue="#{ang}" />
+			    </h:selectOneMenu>
+			</f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+		<p:column style=" width: 25px;  #{telescopeMaskController.horizontMask eq tm ? 'background: #ccffcc' : null }">
+		    <p:commandLink  value="&#128269;"    >
+                        <p:ajax event="click" listener="#{telescopeMaskController.rowSelectAction(tm)}"  
+				update="@form TelescopeMaskTable :TelescopeMaskTableForm:msgsTelescopesMask" />
+                    </p:commandLink>
+		</p:column> 
+		<f:facet name="footer">
+                    <p:outputLabel id="infoselection" value=" #{telescopeMaskController.selectedInfo}" style="background: antiquewhite; color: #ee0000; font-weight: bold " />
+                </f:facet>
+	    </p:dataTable>
+		
+    <p:contextMenu for="@form"  style="width: 550px; font-size: 10px">
+        <p:menuitem value="Delete Selected Mask #{telescopeMaskController.horizontMask.toString()} of Telescope #{telescopeMaskController.telescope.identifier} " 
+	    update=":TelescopeMaskTableForm:TelescopeMaskTable  :TelescopeMaskTableForm:msgsTelescopesMask" icon="ui-icon-close" actionListener="#{telescopeMaskController.removeRow(false)}" />
+        <p:menuitem value="Delete All Masks of Telescope #{telescopeMaskController.telescope.identifier}" 
+	    update=":TelescopeMaskTableForm  :TelescopeMaskTableForm:msgsTelescopesMask" icon="ui-icon-close" actionListener="#{telescopeMaskController.removeRow(true)}" />
+    </p:contextMenu>
+	
+	    </c:if>
+	    
+	</h:form>
+	<ui:include src="/telescopes/LoadTelescopeList.xhtml" />
+	
+    </h:body>
+</html>
+

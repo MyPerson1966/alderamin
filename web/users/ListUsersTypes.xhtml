@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+	<h:form id="UserTypeTableForm">
+            
+            <p:growl id="msgsUserType" showDetail="true" life="900"  for="@form" />
+ 
+            <p:commandButton value="Create UserType"  styleClass="commandbutton">
+                <p:ajax event="click" listener="#{userTypeController.prepareCreation()}"
+			update="@form" 
+			oncomplete="
+			if( PF('UserTypeTable').paginator.cfg.pageCount )
+			PF('UserTypeTable').paginator.setPage(PF('UserTypeTable').paginator.cfg.pageCount - 1); 
+			
+			"
+			
+                />
+	    </p:commandButton>
+	    
+            <p:commandButton id="deselectUserType" value="Deselect User Type" disabled="#{userTypeController.userType==null }" >
+                <p:ajax event="click" listener="#{userTypeController.rowDeSelect()}"
+                    update=":UserTypeTableForm"
+                />
+            </p:commandButton>
+	    
+	<p:dataTable id="UserTypeTable" widgetVar="UserTypeTable" value="#{userTypeController.userTypeList}" var="t"
+		     resizableColumns="true" 
+			 rows="10" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,10,15,20, 25,30"
+			 editable="true">
+	    
+		<p:ajax event="rowEdit" listener="#{userTypeController.onRowEdit}" 
+			update=":UserTypeTableForm:UserTypeTable    :msgForm:msgsInfo" />
+                <p:ajax event="rowEditCancel" listener="#{userTypeController.onRowCancel}" 
+			update=":UserTypeTableForm:UserTypeTable    :msgForm:msgsInfo  @form:deselectUserType" />
+		<p:ajax event="rowSelect" listener="#{userTypeController.rowSelect()}"  
+			update=":UserTypeTableForm:UserTypeTable   :msgForm:msgsInfo   @form:deselectUserType" />  
+	    
+                <p:column style="width: 15px;background: #ffffcc">
+                    <p:rowEditor  />
+                </p:column>
+                <p:column   headerText="NAME" style="width: 200px;"
+			  filterBy="#{t.name}" sortBy="#{t.name}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTypeTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:tooltip styleClass="tooltip"  for="nameOut" value="#{t.name} "  trackMouse="true"  />
+			    <h:outputText id="nameOut" value="#{t.name}" />
+			</f:facet>
+                        <f:facet name="input">
+			    <p:message for="editU"    />
+			    <p:inputText id="editU" value="#{t.name}" styleClass="editField" />
+			</f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="RIGHTS"  sortBy="#{t.rights}">
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:tooltip  for="rightsOut" value="#{t.rights}   ( #{t.binRights} )  "  trackMouse="true"  />
+			    <h:panelGrid id="rightsOut" columns="4"  cellpadding="3" style="background: #fffff0">
+				<c:forEach begin="1" end="8" var="pos">
+				
+				    <ezcomp:rightsDetermin  modify="0" usertype="#{t}" pos="#{pos}" />
+				
+			    </c:forEach>
+			    </h:panelGrid>
+			    
+			</f:facet>
+                        <f:facet name="input" >
+			    
+			    <h:panelGrid columns="4"  cellpadding="3" style="background: #fffffc; color: #aaaaa0">
+				
+				<c:forEach begin="1" end="8"  var="pos">
+				    
+				    <ezcomp:rightsDetermin modify="1" usertype="#{t}" pos="#{pos}"  />
+				
+				</c:forEach>
+			    
+			    </h:panelGrid>
+			    
+			    
+			</f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+		<p:column   style=" width: 15px; #{userTypeController.userType eq t ? 'background: #ccffcc' : null }" >
+                    
+                    <p:commandLink  value="&#9875;"    >
+                        <p:ajax event="click" listener="#{userTypeController.rowSelectAction(t)}"  
+				update=":UserTypeTableForm:UserTypeTable   :msgForm:msgsInfo" />
+                    </p:commandLink>
+                    
+                    
+                  
+		</p:column>
+		
+	    
+	</p:dataTable>
+	    
+	    
+	    
+    
+    <p:contextMenu for=":UserTypeTableForm" style="width: 550px; font-size: 10px;">
+        <p:menuitem value="Delete Selected Telescope  " update="UserTypeTable     :msgForm:msgsInfo"
+		    icon="ui-icon-close" 
+		    actionListener="#{telescopeController.removeRow(false)}"  />
+        <p:menuitem value="Delete All Telescopes" update="UserTypeTable   :msgForm:msgsInfo"
+		    icon="ui-icon-close" actionListener="#{telescopeController.removeRow(true)}" />
+    </p:contextMenu>
+	    
+	</h:form>
+	
+    </h:body>
+</html>
+

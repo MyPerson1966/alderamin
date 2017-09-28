@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        
+        <h:form id="TelescopeTableForm">
+            
+            <p:growl id="msgsTelescopes" showDetail="true" life="900"  for="@form" />
+ 
+            <p:commandButton value="Create Telescope"  styleClass="commandbutton">
+                <p:ajax event="click" listener="#{telescopeController.prepareCreation()}"
+                    update="@form"
+                />
+            </p:commandButton>
+            <p:commandButton value="Deselect Telescope" disabled="#{telescopeController.telescope==null }" >
+                <p:ajax event="click" listener="#{telescopeController.rowDeSelect()}"
+                    update="@form :TelescopeMaskTableForm"
+                />
+            </p:commandButton>
+	    
+	    <p:commandButton value="Upload TelescopeList" type="button" onclick="PF('telescopeUPL').show();" />
+ 
+                    
+            <p:dataTable id="TelescopeTable" widgetVar="TelescopeTable" value="#{telescopeController.telescopeList}" var="t" 
+                         resizableColumns="true" lazy="true" liveScroll="true"
+			 rows="10" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,10,15,20, 25,30"
+			 editable="true">
+                
+                <p:ajax event="rowEdit" listener="#{telescopeController.onRowEdit}" update=":TelescopeTableForm:msgsTelescopes" />
+                <p:ajax event="rowEditCancel" listener="#{telescopeController.onRowCancel}" update=":TelescopeTableForm:msgsTelescopes" />
+		<p:ajax event="rowSelect" listener="#{telescopeController.rowSelect()}"  update=":TelescopeMaskTableForm" />  
+		
+                <f:facet name="header">
+                   <p:outputPanel> TELESCOPES
+			<h:outputText value="Search all fields:" />
+			<p:inputText id="globalFilter" styleClass="globalsearchField" onkeyup="PF('TelescopeTable').filter()" 
+				     placeholder="Enter keyword"/>
+            
+		       
+		   </p:outputPanel>
+                </f:facet>
+                
+                <p:column style="width: 15px;background: #ffffcc">
+                    <p:rowEditor  />
+                </p:column>
+                <p:column headerText="NUMBER"
+			  filterBy="#{t.identifier}" sortBy="#{t.identifier}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:tooltip  for="identOut" value="#{t.identifier} "  trackMouse="true"  />
+			    <h:outputText id="identOut" value="#{t.identifier}" 
+							     />
+			</f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.identifier}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Name" filterBy="#{t.name}" sortBy="#{t.name}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
+		    </f:facet>
+                    
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="nameOut" value="#{t.name} "  trackMouse="true" /> 
+			    <h:outputText id="nameOut" value="#{t.name}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.name}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="LOCATION" filterBy="#{t.location}" sortBy="#{t.location}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
+		    </f:facet>
+                    
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="locOut" value="#{t.location} " trackMouse="true" />
+			    <h:outputText id="locOut" value="#{t.location}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.location}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="LONGITUDE&deg; ">
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="longOut" value="#{t.longitude}&deg; " />
+			    <h:outputText id="longOut" value="#{t.longitude}&deg; " /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.longitude}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="LATITUDE&deg;">
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="latiOut" value="#{t.longitude}&deg; "  trackMouse="true" />
+			    <h:outputText id="latiOut" value="#{t.latitude}&deg; " /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.latitude}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="X km">
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="xOut" value="#{t.x} km"  trackMouse="true" />
+			    <h:outputText id="xOut" value="#{t.x}km" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.x}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Y km">
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="yOut" value="#{t.y} km"  trackMouse="true" />
+			    <h:outputText id="yOut" value="#{t.y}km" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.y}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Z km">
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="zOut" value="#{t.z} km"  trackMouse="true" />
+			    <h:outputText id="zOut" value="#{t.z}km" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.z}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="HEIGHT km">
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="hOut" value="#{t.height} km"  trackMouse="true" />
+			    <h:outputText id="hOut" value="#{t.height}km" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{t.height}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="DESCRIPTION" filterBy="#{t.description}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output">
+			    <p:tooltip  for="descrOut" value="#{t.description} "  trackMouse="true" />
+			    <h:outputText id="descrOut" value="#{t.description}" /></f:facet>
+                        <f:facet name="input"><p:inputTextarea value="#{t.description}" styleClass="editField" /></f:facet>
+			
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="COMMENT"  filterBy="#{t.comment}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output">
+			<p:tooltip  for="commentOut" value="#{t.description} "  trackMouse="true" />
+			<h:outputText id="commentOut" value="#{t.comment}" /></f:facet>
+                        <f:facet name="input"><p:inputTextarea value="#{t.comment}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                 
+                <p:column   style=" width: 15px; #{telescopeController.telescope.identifier eq t.identifier ? 'background: #ccffcc' : null }" >
+                    
+                    <p:commandLink  value="&#128269;"    >
+                        <p:ajax event="click" listener="#{telescopeController.rowSelectAction(t)}"  
+				update="@form :TelescopeMaskTableForm" />
+                    </p:commandLink>
+                    
+                    
+                  
+		</p:column>
+		
+		
+                
+                <f:facet name="footer">
+                    <p:outputLabel id="infoselection" value=" #{telescopeController.selectedInfo}" style="background: antiquewhite; color: #ee0000; font-weight: bold " />
+                </f:facet>
+                
+            </p:dataTable>
+    
+    <p:contextMenu for="@form" style="width: 550px; font-size: 10px;">
+        <p:menuitem value="Delete Selected Telescope  " update="TelescopeTable :TelescopeMaskTableForm"
+		    icon="ui-icon-close" 
+		    actionListener="#{telescopeController.removeRow(false)}"  />
+        <p:menuitem value="Delete All Telescopes" update="TelescopeTable :TelescopeMaskTableForm"
+		    icon="ui-icon-close" actionListener="#{telescopeController.removeRow(true)}" />
+    </p:contextMenu>
+            
+        </h:form>
+        
+    </h:body>
+</html>
+
