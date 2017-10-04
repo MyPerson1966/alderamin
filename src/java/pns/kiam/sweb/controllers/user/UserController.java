@@ -96,9 +96,14 @@ public class UserController extends AbstractController implements Serializable {
 	this.passwNEW = passwNEW;
     }
 
+    /**
+     * generate a new password for a user
+     *
+     * @param random if true , than the new pw is not empty
+     */
     public void generatePW(boolean random) {
 	if (random) {
-	    int k = pns.utils.numbers.RInts.rndInt(12, 15);
+	    int k = pns.utils.numbers.RInts.rndInt(12, 17);
 	    for (int i = 0; i < 5; i++) {
 		passwNEW += pns.utils.strings.RStrings.rndLetterString();
 	    }
