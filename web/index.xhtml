@@ -5,18 +5,14 @@
 
     <body>
 
-        <ui:composition template="./bTemplate.xhtml">
+	
+        <ui:composition template="/startTemplate.xhtml">
 
 
-	    
-            <ui:define name="content">
-		<ui:include src="/telescopes/ListTelescope.xhtml" />
+	    <ui:define name="content">
+		<ui:include src="/users/loginBox.xhtml" />
             </ui:define>
-
-            <ui:define name="right">
-                <ui:include src="/telescopes/ListMask.xhtml" />
-            </ui:define>
-        </ui:composition>
+	</ui:composition>
 
     </body>
 </html>

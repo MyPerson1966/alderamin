@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.inject.Named;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,7 +22,7 @@ import pns.kiam.sweb.utils.MessageUtils;
  *
  * @author PSEVO tochka
  */
-@Stateless
+@Stateful
 @Named
 public class UserController extends AbstractController implements Serializable {
 
@@ -30,12 +30,15 @@ public class UserController extends AbstractController implements Serializable {
     private List<User> userList = new ArrayList<>();
     private CriteriaQuery<User> cq;
 
+    private String login = "", passw = "", passwNEW = "";
+
     @PostConstruct
     public void init() {
 	try {
 	    cb = em.getCriteriaBuilder();
 	    cq = cb.createQuery(User.class);
 	    userList = loadAllUsers();
+	    generatePW(true);
 	} catch (NullPointerException e) {
 	}
 
@@ -69,6 +72,72 @@ public class UserController extends AbstractController implements Serializable {
 	this.userList = userList;
     }
 
+    public String getLogin() {
+	return login;
+    }
+
+    public void setLogin(String login) {
+	this.login = login;
+    }
+
+    public String getPassw() {
+	return passw;
+    }
+
+    public void setPassw(String passw) {
+	this.passw = passw;
+    }
+
+    public String getPasswNEW() {
+	return passwNEW;
+    }
+
+    public void setPasswNEW(String passwNEW) {
+	this.passwNEW = passwNEW;
+    }
+
+    public void generatePW(boolean random) {
+	if (random) {
+	    int k = pns.utils.numbers.RInts.rndInt(12, 15);
+	    for (int i = 0; i < 5; i++) {
+		passwNEW += pns.utils.strings.RStrings.rndLetterString();
+	    }
+	    passwNEW = passwNEW.substring(0, k);
+	} else {
+	    passwNEW = "";
+	}
+	System.out.println("  passw " + passw);
+    }
+
+    public String validateUser() {
+	System.out.println("userList.size() == 0 " + (userList.size() == 0));
+	if (userList.size() == 0) {
+	    return "/users/usercreate";
+	}
+	if (userExists()) {
+	    return "/users/userdata";
+	} else {
+	    return "index";
+	}
+    }
+
+    private boolean userExists() {
+	if (userList.size() == 0) {
+	    return false;
+	}
+	int npp = 0;
+	for (int k = 0; k < userList.size(); k++) {
+	    User tmp = userList.get(k);
+	    if (login.equals(tmp.getPassword()) && passw.equals(tmp.getUserTelescope().getIdentifier())) {
+		npp++;
+	    }
+	}
+	return npp == 1;
+    }
+
+    private void createUser() {
+
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
