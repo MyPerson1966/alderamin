@@ -7,21 +7,46 @@
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body  onload="document.getElementById('fm:pwField').focus()">
+    <h:body>
 	<h:form id="fm" styleClass="loginform">
-	    <h:panelGrid columns="1" cellpadding="10"  styleClass="panelgrid">
-		<h:outputText value="Login" />
-		<h:inputText value="#{userController.login}"/>
-		
-		<h:outputText value="Password" />
+            
+            <h:panelGrid id="fmGrid" columns="3" cellpadding="10"  styleClass="panelgrid">
+                
+                <h:outputText value="Login" />
+                <p:inputText id="login" value="#{userController.loginNEW}" 
+                             requiredMessage="Value is required"
+                             validatorMessage=" Value length is between 4 and 30"
+                             required="true"  >
+                <f:validateLength minimum="4" maximum="30"  />
+                <p:clientValidator  />
+                </p:inputText> 
+                <p:message for="login" display="icon text" />
+                
+                <h:outputText value="Email" />
+                
+                <p:inputText  id="email" required="true"  
+                    value="#{userController.emailNEW}" 
+                             requiredMessage="Please enter your email address."
+		validatorMessage="Invalid email format"
+		>
+                     <f:validateRegex
+                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+
+                </p:inputText>
+                <p:message for="email" display="icon text" />
+               
+                
+                <h:outputText value="Password" />                
 		<p:inputText id="pwField" value="#{userController.passwNEW}" />
-		<h:commandLink value="ReCreate A Password" >
+		<h:commandLink value="Re-Create A Password" >
 		    <p:ajax event="click" listener="#{userController.generatePW(true)}" update="fm:pwField" /> 
 		</h:commandLink>
+                
 	    </h:panelGrid>
-	    
+            
+            <p:commandButton value="Create a New User" ajax="false" validateClient="true" actionListener="#{userController.createUser()}"  >
+            </p:commandButton>
 	</h:form>
-#{userController.passw}
     </h:body>
 </html>
 
