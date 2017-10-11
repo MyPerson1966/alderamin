@@ -854,10 +854,14 @@ exists or setup the property manually. For example like this:
             -->
     <target depends="init" if="no.dist.ear.dir" name="deps-module-jar" unless="no.deps">
         <ant antfile="${project.LIGHT-UTILS}/build.xml" inheritall="false" target="dist"/>
+        <ant antfile="${project.S-CONTROLLERS}/build.xml" inheritall="false" target="dist"/>
         <ant antfile="${project.SATELITES-jar}/build.xml" inheritall="false" target="dist"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="deps-ear-jar" unless="no.deps">
         <ant antfile="${project.LIGHT-UTILS}/build.xml" inheritall="false" target="dist-ear">
+            <property location="${build.dir}" name="dist.ear.dir"/>
+        </ant>
+        <ant antfile="${project.S-CONTROLLERS}/build.xml" inheritall="false" target="dist-ear">
             <property location="${build.dir}" name="dist.ear.dir"/>
         </ant>
         <ant antfile="${project.SATELITES-jar}/build.xml" inheritall="false" target="dist-ear">
@@ -1010,6 +1014,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${libs.primefaces.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.SATELITES-jar.dist}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}"/>
         <copyfiles files="${reference.LIGHT-UTILS.dist}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}"/>
+        <copyfiles files="${reference.S-CONTROLLERS.dist}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1017,6 +1022,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${libs.primefaces.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.SATELITES-jar.dist}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.LIGHT-UTILS.dist}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${reference.S-CONTROLLERS.dist}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
@@ -1431,6 +1437,7 @@ exists or setup the property manually. For example like this:
             -->
     <target depends="init" name="deps-clean" unless="no.deps">
         <ant antfile="${project.LIGHT-UTILS}/build.xml" inheritall="false" target="clean"/>
+        <ant antfile="${project.S-CONTROLLERS}/build.xml" inheritall="false" target="clean"/>
         <ant antfile="${project.SATELITES-jar}/build.xml" inheritall="false" target="clean"/>
     </target>
     <target depends="init" name="do-clean">

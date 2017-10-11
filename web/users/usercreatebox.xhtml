@@ -9,15 +9,19 @@
     </h:head>
     <h:body  onload="document.getElementById('fm:pwField').focus()">
 	<h:form id="fm" styleClass="loginform">
-	    <h:panelGrid columns="1" cellpadding="10"  styleClass="panelgrid">
-		<h:outputText value="Login" />
-		<h:inputText value="#{userController.login}"/>
+	    <h:panelGrid columns="3" cellpadding="5"  styleClass="panelgrid">
 		
-		<h:outputText value="Password" />
+		<p:outputLabel value="Login" />
+		<p:inputText id="login" value="#{userController.login}" required="true" requiredMessage="Valueis required"
+			     
+			     />
+		<p:message for="login" />
+		<p:outputLabel value="Password" />
 		<p:inputText id="pwField" value="#{userController.passwNEW}" />
 		<h:commandLink value="ReCreate A Password" >
 		    <p:ajax event="click" listener="#{userController.generatePW(true)}" update="fm:pwField" /> 
 		</h:commandLink>
+		
 	    </h:panelGrid>
 	    
 	</h:form>

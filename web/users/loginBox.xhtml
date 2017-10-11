@@ -1,19 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
 	
 	<h:form styleClass="loginform">
-	    <h:panelGrid columns="2" cellpadding="10"  styleClass="panelgrid">
-		<h:outputText value="Login" />
-		<h:inputText value="#{userController.login}"/>
-		
-		<h:outputText value="Password" />
-		<h:inputText value="#{userController.passw}"/>
+	    <h:panelGrid columns="3" cellpadding="10"  styleClass="panelgrid">
+		<p:outputLabel value="Login" />
+		<p:inputText id="login" value="#{userController.login}"  required="true" requiredMessage="Valueis required"/>
+		<p:message for="login" />
+		<p:outputLabel value="Password" />
+		<p:inputText id="pass" value="#{userController.passw}"   required="true" requiredMessage="Valueis required"/>
+		<p:message for="pass" />
 	    </h:panelGrid>
 	    <h:commandButton value="Login" action="#{userController.validateUser()}"  styleClass="btn"/>
 	</h:form>
