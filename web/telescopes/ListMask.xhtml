@@ -13,29 +13,30 @@
 	
 	
 	<h:form id="TelescopeMaskTableForm">
-	    <p:commandButton id="createBTN" value="Create Mask" 
-			     disabled="#{(telescopeMaskController.telescope==null )  || ( telescopeMaskController.editModeActive )}" >
-		<p:ajax event="click" listener="#{telescopeMaskController.prepareCreate()}" 
+	    <p:commandLink id="createBTN" value="Create Mask" 
+			     disabled="#{(telescopeMaskControl.controller.telescope==null )  || ( telescopeMaskControl.controller.editModeActive )}" >
+		<p:ajax event="click" listener="#{telescopeMaskControl.controller.prepareCreation()}" 
 			update="@form  :msgForm:msgsInfo" 
-			oncomplete="PF('TelescopeMaskTable').paginator.setPage(PF('TelescopeMaskTable').paginator.cfg.pageCount - 1);"
+			oncomplete="
+			PF('TelescopeMaskTable').paginator.setPage(PF('TelescopeMaskTable').paginator.cfg.pageCount - 1);"
 			/>
-	    </p:commandButton>
-	    <p:commandButton id="deselectMask" value="Deselect Mask" 
-			     disabled="#{(telescopeMaskController.horizontMask==null )}" >
-		<p:ajax event="click" listener="#{telescopeMaskController.rowDeSelect()}" 
+	    </p:commandLink> || 
+	    <p:commandLink id="deselectMask" value="Deselect Mask" 
+			     disabled="#{(telescopeMaskControl.controller.horizontMask==null )}" >
+		<p:ajax event="click" listener="#{telescopeMaskControl.controller.rowDeSelect()}" 
 			update=":TelescopeMaskTableForm  :msgForm:msgsInfo" />
-	    </p:commandButton>
+	    </p:commandLink>
 	    
 
             
-	    <c:if  test="#{telescopeMaskController.telescope.telescopeMask.size()>0}">
 	    <p:dataTable id="TelescopeMaskTable" widgetVar="TelescopeMaskTable"
-			 value="#{telescopeMaskController.telescope.telescopeMask}" var="tm"
+			 style=" #{telescopeMaskControl.controller.telescope.telescopeMask.size()>0 eq tm ? 'display: block' : ' none' }"
+			 value="#{telescopeMaskControl.controller.telescope.telescopeMask}" var="tm"
                          rows="12" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" 
 			 editable="true" 
 			 >
 		
-		<p:ajax event="rowEdit" listener="#{telescopeMaskController.onRowEdit}"
+		<p:ajax event="rowEdit" listener="#{telescopeMaskControl.controller.onRowEdit}"
 			update=":TelescopeMaskTableForm  :msgForm:msgsInfo" />
 		
 		
@@ -63,13 +64,13 @@
                         <f:facet name="output"><h:outputText value="#{tm.angle}" /></f:facet>
                         <f:facet name="input">
 			    <h:selectOneMenu value="#{tm.angle}" style="width:100%">
-				<f:selectItems value="#{telescopeMaskController.angleRange}" var="ang" itemLabel="#{ang}" itemValue="#{ang}" />
+				<f:selectItems value="#{telescopeMaskControl.controller.angleRange}" var="ang" itemLabel="#{ang}" itemValue="#{ang}" />
 			    </h:selectOneMenu>
 			</f:facet>
                     </p:cellEditor>
                 </p:column>
                 
-		<p:column style=" width: 25px;  #{telescopeMaskController.horizontMask eq tm ? 'background: #ccffcc' : null }">
+		<p:column style=" width: 25px;  #{telescopeMaskControl.controller.horizontMask eq tm ? 'background: #ccffcc' : null }">
 		    <p:commandLink  value="&#9875;"    >
                         <p:ajax event="click" listener="#{telescopeMaskController.rowSelectAction(tm)}"  
 				update="@form TelescopeMaskTable :msgForm:msgsInfo" />
@@ -77,20 +78,20 @@
 		</p:column> 
 		<f:facet name="footer">
                     <p:outputLabel id="infoselection" 
-				   value=" #{telescopeMaskController.selectedInfo}" style="background: antiquewhite; color: #ee0000; font-weight: bold " />
+				   value=" #{telescopeMaskControl.controller.selectedInfo}" style="background: antiquewhite; color: #ee0000; font-weight: bold " />
                 </f:facet>
 	    </p:dataTable>
 		
     <p:contextMenu for=":TelescopeMaskTableForm"  style="width: 550px; font-size: 10px">
-        <p:menuitem value="Delete Selected Mask #{telescopeMaskController.horizontMask.toString()} of Telescope #{telescopeMaskController.telescope.identifier} " 
-	    update=":TelescopeMaskTable   :msgForm:msgsInfo" icon="ui-icon-close" 
+        <p:menuitem 
+	    value="Delete Selected Mask #{telescopeMaskControl.controller.horizontMask.toString()} of Telescope #{telescopeMaskControl.controller.telescope.identifier} " 
+	    update=":TelescopeMaskTableForm   :msgForm:msgsInfo" icon="ui-icon-close" 
 	    actionListener="#{telescopeMaskController.removeRow(false)}" />
         <p:menuitem value="Delete All Masks of Telescope #{telescopeMaskController.telescope.identifier}" 
 	    update=":TelescopeMaskTableForm   :msgForm:msgsInfo" 
 	    icon="ui-icon-close" actionListener="#{telescopeMaskController.removeRow(true)}" />
     </p:contextMenu>
 	
-	    </c:if>
 	    
 	</h:form>
 	<ui:include src="/telescopes/LoadTelescopeList.xhtml" />
