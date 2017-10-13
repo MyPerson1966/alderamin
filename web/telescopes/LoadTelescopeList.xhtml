@@ -7,19 +7,17 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-	<p:dialog header="Upload Telescopes List" widgetVar="telescopeUPL" modal="true" height="50" width="400">
+        <p:dialog header="Upload Telescopes List" widgetVar="telescopeUPL" modal="true" height="50" width="370"  closeOnEscape="true">
 	    <h:form enctype="multipart/form-data">
-		    <p:growl id="messagesUPL" showDetail="true" />
- 
-		    <p:fileUpload value="#{telescopeListUploaderController.file}"  required="true"
+               
+                <p:fileUpload value="#{telescopeUploaderControl.controller.file}" 
 				  auto="true"
-				  mode="simple" />
- 
-		    <p:commandButton value="Submit" ajax="false" actionListener="#{telescopeListUploaderController.upload()}" 
-				      update=":TelescopeTableForm:TelescopeTable"/>
-		    
+				  mode="simple" /><br />
+		    <p:commandButton value="Submit" ajax="false" actionListener="#{telescopeUploaderControl.controller.upload()}" 
+                                     update=":TelescopeTableForm:TelescopeTable"/>
 		</h:form>
-	    
+	   
+                  
 	</p:dialog>   
     </h:body>
 </html>

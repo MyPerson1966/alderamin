@@ -12,9 +12,6 @@
     <h:body>
 	
         <h:form id="TelescopeTableForm">
-            <p:commandLink value="Test">
-		<p:ajax event="click" listener="#{telescopeControl.businessMethod()}" />
-	    </p:commandLink> |||| 
             <p:commandLink value="Create Telescope"  styleClass="commandbutton">
                 <p:ajax event="click" listener="#{telescopeControl.prepareCreation()}"
 			update=":TelescopeTableForm :msgForm:msgsInfo" 
@@ -26,17 +23,21 @@
                     update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo"
                 />
             </p:commandLink> ||  
-	    <p:commandLink value="Upload TelescopeList" type="button" onclick="PF('telescopeUPL').show();" />
- 
-                    
+	    <p:commandLink value="Upload Telescope List" type="button" onclick="PF('telescopeUPL').show();" /> ||
+            <p:commandLink value="Fix Uploaded Telescope data" disabled="#{!telescopeControl.controller.freshUploadComplete}" >
+                <p:ajax event="click" listener="#{telescopeControl.controller.fixAllAdded()}"
+                    update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo"
+                />
+            </p:commandLink>
+            
             <p:dataTable id="TelescopeTable" widgetVar="TelescopeTable" value="#{telescopeControl.controller.telescopeList}" var="t" 
 			 resizableColumns="true"
 			 rows="10" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,10,15,20, 25,30"
 			 editable="true">
                 
-                <p:ajax event="rowEdit" listener="#{telescopeControl.onRowEdit}" update=":msgForm:msgsInfo" />
-                <p:ajax event="rowEditCancel" listener="#{telescopeControl.onRowCancel}" update=":msgForm:msgsInfo" />
-		<p:ajax event="rowSelect" listener="#{telescopeControl.rowSelect()}"  update=":msgForm:msgsInfo" />  
+                <p:ajax event="rowEdit" listener="#{telescopeControl.controller.onRowEdit}" update=":msgForm:msgsInfo" />
+                <p:ajax event="rowEditCancel" listener="#{telescopeControl.controller.onRowCancel}" update=":msgForm:msgsInfo" />
+                <p:ajax event="rowSelect" listener="#{telescopeControl.controller.rowSelect()}"  update=":msgForm:msgsInfo" />  
 		
                 <f:facet name="header">
                    <p:outputPanel> TELESCOPES
@@ -194,8 +195,8 @@
         </h:form>
         
 	<ezcomp:popUpRemoveMenu
-		removeMethodSelected="#{telescopeControl.removeRow(false)}"
-		removeMethodAll="#{telescopeControl.removeRow(true)}"
+            removeMethodSelected="#{telescopeControl.controller.removeRow(false)}"
+                removeMethodAll="#{telescopeControl.controller.removeRow(true)}"
 		delAllCaption="Delete All Telescope "
 		delSelectedCaption="Delete Selected Telescope "
 		targetFor=":TelescopeTableForm" targetUpdate=":TelescopeTableForm:TelescopeTable :TelescopeMaskTableForm    :msgForm:msgsInfo"
