@@ -8,7 +8,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <table width="50%" align="center">
+        <table width="650" align="center">
             <tr valign="top">
                 <td>
                     <h:form styleClass="mainforms">
@@ -23,10 +23,15 @@
                             <p:inputText id="passwF" value="#{userLoginControl.password}"  required="true" 
                                          validatorMessage="TEST!"  requiredMessage="Value required"
                                          />
+                            
                             <p:message for="passwF" />
-                        </h:panelGrid>
+                         
+                            <br /> 
                         <p:commandButton value="Join"  action="#{userLoginControl.testLogin() }"  update="@all" >
                         </p:commandButton>
+                         
+                            <br />    
+                        </h:panelGrid>
                         
                         
                         

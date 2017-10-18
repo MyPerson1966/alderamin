@@ -7,6 +7,7 @@ package pns.kiam.controllers.app;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -61,10 +62,15 @@ public class ConfigControl {
         return configADMLogin;
     }
 
+    public XXParserSWEB getXxparser() {
+        return xxparser;
+    }
+
     @PostConstruct
     public void init() {
 
         xxparser.setDocUrl("appsconf/s-web.xml");
+
 //        System.out.println("   " + xxparser.getDocUrl());
         try {
             xxparser.build();
@@ -81,6 +87,35 @@ public class ConfigControl {
 
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    /**
+     * Killing and stop a session
+     */
+    public void sessionKill() {
+        System.out.println("  xxparser.getSsessionControl(): " + (xxparser.getSsessionControl() == null) + "   "
+                + xxparser.getSsessionControl().getSession().getId());
+        if (xxparser.getSsessionControl().getSession() != null) {
+            System.out.println("Session to kill: " + xxparser.getSsessionControl().getSession().getId());
+            xxparser.getSsessionControl().sessionDestroy();
+        }
+    }
+
+    /**
+     * Starting a session for time secunds
+     *
+     * @param time
+     */
+    public void sessionStart(int time) {
+        System.out.println("  xxparser.getSsessionControl(): " + (xxparser.getSsessionControl() == null));
+
+        if (xxparser.getSsessionControl() == null) {
+            xxparser.getSsessionControl().init();
+            xxparser.getSsessionControl().setTimeout(time);
+        } else {
+            Long LL = xxparser.getSsessionControl().getSession().getCreationTime();
+            xxparser.getSsessionControl().setTimeout(time);
+            System.out.println("  session start " + new Date() + "   " //+ //LL
+                    + "   " + xxparser.getSsessionControl().getSession().getMaxInactiveInterval());
+        }
+
+    }
 }

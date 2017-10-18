@@ -12,6 +12,11 @@
     <h:body>
         <h:form id="TelescopeTableForm">
             
+            <p:commandLink value="TEST "  styleClass="commandbutton">
+                <p:ajax event="click" listener="#{telescopeControl.businessMethod()}"
+			
+                />
+            </p:commandLink> || 
             <p:commandLink value="Create Telescope"  styleClass="commandbutton">
                 <p:ajax event="click" listener="#{telescopeControl.prepareCreation()}"
 			update=":TelescopeTableForm :msgForm:msgsInfo" 

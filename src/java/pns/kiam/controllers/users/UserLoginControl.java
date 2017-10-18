@@ -11,8 +11,11 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.ejb.Singleton;
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import pns.kiam.controllers.app.ConfigControl;
 
 /**
@@ -96,12 +99,24 @@ public class UserLoginControl implements Serializable {
         if (login.equals(configControl.getConfigADMLogin()) && password.equals(configControl.getConfigAdmPassword())) {
             loginned = true;
             isSuperUser = true;
+            //
+            configControl.getXxparser().getSsessionControl().init();
+            configControl.sessionStart(80);
+//            System.out.println(" configControl.getXxparser().getSsessionControl().getSession().getId()=  "
+//                    + (configControl.getXxparser().getSsessionControl() == null) + "  "
+//                    + (configControl.getXxparser().getSsessionControl().getSession().getId() == null) + "   "
+//                    + configControl.getXxparser().getSsessionControl().getSession().getId() + "  / "
+//                    + configControl.getXxparser().getSsessionControl().getSession().getMaxInactiveInterval()
+//            );
             return;
         }
     }
 
-    public void deLOgin() {
+    public String deLogin() {
         login = password = "";
         loginned = false;
+
+        configControl.sessionKill();
+        return "/index.xhtml?faces-redirect=true";
     }
 }
