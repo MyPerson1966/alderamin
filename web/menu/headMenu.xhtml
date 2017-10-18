@@ -22,7 +22,7 @@
 		<p:menuitem value="Users" outcome="/users/userdata"  icon="ui-icon-document"></p:menuitem>
 		<p:menuitem value="Users Types" outcome="/users/usertypedata"  icon="ui-icon-document"></p:menuitem>
 	    </p:submenu>
-	    <p:menuitem value="Quit"  icon="ui-icon-close" />
+            <p:menuitem value="Quit"  icon="ui-icon-close" action="#{userLoginControl.deLOgin()}" update="@all" />
 	</p:menubar>
 	</h:form>
     </h:body>
