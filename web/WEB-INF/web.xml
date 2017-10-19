@@ -18,6 +18,9 @@
             10
         </session-timeout>
     </session-config>
+    <listener>
+	<listener-class>pns.kiam.sweb.controllers.app.SsessionControl</listener-class>
+    </listener>
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>

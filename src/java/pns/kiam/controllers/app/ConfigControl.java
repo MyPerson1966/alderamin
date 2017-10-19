@@ -17,6 +17,9 @@ import javax.ejb.Startup;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.Application;
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.parsers.ParserConfigurationException;
@@ -117,5 +120,11 @@ public class ConfigControl {
                     + "   " + xxparser.getSsessionControl().getSession().getMaxInactiveInterval());
         }
 
+    }
+
+    public void navigate(String gotoURL) {
+        System.out.println("   gotoURL  " + gotoURL);
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        //NavigationHandler myNav = facesContext.getApplication().getNavigationHandler();
     }
 }

@@ -17,10 +17,10 @@
 	    
 	<p:menubar>
 	    
-	    <p:menuitem value="Telescopes" outcome="/telescopes/telescopedata"  icon="ui-icon-document"></p:menuitem>
+	    <p:menuitem value="Telescopes" outcome="#{'/telescopes/telescopedata'}"  icon="ui-icon-document"></p:menuitem>
 	    <p:submenu label="Users Docs">
-		<p:menuitem value="Users" outcome="/users/userdata"  icon="ui-icon-document"></p:menuitem>
-		<p:menuitem value="Users Types" outcome="/users/usertypedata"  icon="ui-icon-document"></p:menuitem>
+                <p:menuitem value="Users" outcome="#{menuControl.navigste('/users/userdata' )}"  icon="ui-icon-document"></p:menuitem>
+                <p:menuitem value="Users Types" outcome="#{menuControl.navigste('/users/usertypedata')}"  icon="ui-icon-document"></p:menuitem>
 	    </p:submenu>
             <p:menuitem value="Quit"  icon="ui-icon-close" action="#{userLoginControl.deLogin()}" update="@all" />
 	</p:menubar>
