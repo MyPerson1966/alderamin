@@ -87,7 +87,6 @@ public class ConfigControl {
         } catch (IOException ex) {
             Logger.getLogger(ConfigControl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**
@@ -102,26 +101,25 @@ public class ConfigControl {
         }
     }
 
-    /**
-     * Starting a session for time secunds
-     *
-     * @param time
-     */
-    public void sessionStart(int time) {
-        System.out.println("  xxparser.getSsessionControl(): " + (xxparser.getSsessionControl() == null));
-
-        if (xxparser.getSsessionControl() == null) {
-            xxparser.getSsessionControl().init();
-            xxparser.getSsessionControl().setTimeout(time);
-        } else {
-            Long LL = xxparser.getSsessionControl().getSession().getCreationTime();
-            xxparser.getSsessionControl().setTimeout(time);
-            System.out.println("  session start " + new Date() + "   " //+ //LL
-                    + "   " + xxparser.getSsessionControl().getSession().getMaxInactiveInterval());
-        }
-
-    }
-
+//    /**
+//     * Starting a session for time secunds
+//     *
+//     * @param time
+//     */
+//    public void sessionStart(int time) {
+//        System.out.println("  xxparser.getSsessionControl(): " + (xxparser.getSsessionControl() == null));
+//
+//        if (xxparser.getSsessionControl() == null) {
+//            xxparser.getSsessionControl().init();
+//            xxparser.getSsessionControl().setTimeout(time);
+//        } else {
+//            Long LL = xxparser.getSsessionControl().getSession().getCreationTime();
+//            xxparser.getSsessionControl().setTimeout(time);
+//            System.out.println("  session start " + new Date() + "   " //+ //LL
+//                    + "   " + xxparser.getSsessionControl().getSession().getMaxInactiveInterval());
+//        }
+//
+//    }
     public void navigate(String gotoURL) {
         System.out.println("   gotoURL  " + gotoURL);
         FacesContext facesContext = FacesContext.getCurrentInstance();

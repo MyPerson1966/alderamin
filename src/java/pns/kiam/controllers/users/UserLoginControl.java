@@ -14,9 +14,11 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import pns.kiam.controllers.app.ConfigControl;
+import pns.kiam.sweb.controllers.app.SsessionControl;
 
 /**
  *
@@ -28,6 +30,8 @@ public class UserLoginControl implements Serializable {
 
     @EJB
     private ConfigControl configControl;
+    @Inject
+    private SsessionControl ssessionCTRL;
 
     private boolean loginned = false;
     private boolean isSuperUser = false;
@@ -96,19 +100,22 @@ public class UserLoginControl implements Serializable {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void testLogin() {
+
         if (login.equals(configControl.getConfigADMLogin()) && password.equals(configControl.getConfigAdmPassword())) {
             loginned = true;
             isSuperUser = true;
-            //
-            configControl.getXxparser().getSsessionControl().init();
-            configControl.sessionStart(80);
-//            System.out.println(" configControl.getXxparser().getSsessionControl().getSession().getId()=  "
-//                    + (configControl.getXxparser().getSsessionControl() == null) + "  "
-//                    + (configControl.getXxparser().getSsessionControl().getSession().getId() == null) + "   "
-//                    + configControl.getXxparser().getSsessionControl().getSession().getId() + "  / "
-//                    + configControl.getXxparser().getSsessionControl().getSession().getMaxInactiveInterval()
-//            );
-            return;
+            ssessionCTRL.init();
+            ssessionCTRL.setTimeout(30);
+            System.out.println(" ssessionCTRL.getSession() == null  =  "
+                    + (ssessionCTRL.getSession() == null) + "  " + ""
+                    + "  ssessionCTRL.getSession().getId() == null  "
+                    + (ssessionCTRL.getSession().getId() == null) + "   "
+                    + ssessionCTRL.getSession().getId() + "  / "
+                    + ssessionCTRL.getSession().getMaxInactiveInterval() + "   "
+                    + ssessionCTRL.isActive()
+            );
+
+//            return;
         }
     }
 

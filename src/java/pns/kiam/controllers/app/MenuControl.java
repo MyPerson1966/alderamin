@@ -8,6 +8,8 @@ package pns.kiam.controllers.app;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import pns.kiam.sweb.controllers.app.SsessionControl;
 import pns.kiam.sweb.controllers.app.XXParserSWEB;
 
 /**
@@ -23,16 +25,18 @@ public class MenuControl {
      */
     @EJB
     private XXParserSWEB xxparser;
+    @Inject
+    private SsessionControl ssessionCTRL;
 
-    public MenuControl() {
-    }
-
+//    public MenuControl() {
+//    }
     public String navigste(String gotoURL) {
-        System.out.println("      (xxparser.getSsessionControl().getSession() finished)  " + (xxparser.getSsessionControl().isFinished()));
+        System.out.println("      (ssessionCTRL.getSession() finished)  " + (ssessionCTRL.isActive()));
 
-        if (xxparser.getSsessionControl().getSession() == null) {
-            return "/index";
-        }
+//        if (ssessionCTRL.isFinished()) {
+//            System.out.println("  ssss~!!! ====>>>>>>>>>>>>>>>>> expi   ");
+//            return "/index";
+//        }
         return "/index";
         //return gotoURL;
     }
