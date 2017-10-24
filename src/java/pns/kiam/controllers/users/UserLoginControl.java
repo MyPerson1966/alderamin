@@ -105,7 +105,7 @@ public class UserLoginControl implements Serializable {
             loginned = true;
             isSuperUser = true;
             ssessionCTRL.init();
-            ssessionCTRL.setTimeout(30);
+            ssessionCTRL.setTimeout(Integer.MAX_VALUE);
             System.out.println(" ssessionCTRL.getSession() == null  =  "
                     + (ssessionCTRL.getSession() == null) + "  " + ""
                     + "  ssessionCTRL.getSession().getId() == null  "
