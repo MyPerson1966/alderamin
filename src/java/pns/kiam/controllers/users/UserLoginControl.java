@@ -105,7 +105,8 @@ public class UserLoginControl implements Serializable {
             loginned = true;
             isSuperUser = true;
             ssessionCTRL.init();
-            ssessionCTRL.setTimeout(Integer.MAX_VALUE);
+//            ssessionCTRL.setTimeout(Integer.MAX_VALUE);
+            ssessionCTRL.setTimeout(80);
             System.out.println(" ssessionCTRL.getSession() == null  =  "
                     + (ssessionCTRL.getSession() == null) + "  " + ""
                     + "  ssessionCTRL.getSession().getId() == null  "
@@ -114,16 +115,15 @@ public class UserLoginControl implements Serializable {
                     + ssessionCTRL.getSession().getMaxInactiveInterval() + "   "
                     + ssessionCTRL.isActive()
             );
-
-//            return;
         }
+
     }
 
     public String deLogin() {
         login = password = "";
         loginned = false;
 
-        configControl.sessionKill();
+        ssessionCTRL.sessionDestroy();
         return "/index.xhtml?faces-redirect=true";
     }
 }
