@@ -5,6 +5,7 @@
  */
 package pns.kiam.controllers.users;
 
+import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,8 +18,7 @@ import pns.kiam.sweb.controllers.user.UserController;
  */
 @Named
 @RequestScoped
-
-public class UserControl {
+public class UserControl implements Serializable {
 
     @Inject
     private UserController userController;

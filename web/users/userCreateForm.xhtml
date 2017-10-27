@@ -9,7 +9,7 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-	<table width="650" align="center">
+	<table width="800" align="center">
 	    <tr>
 		<td>
 		    
@@ -49,11 +49,23 @@
 			    <ezcomp:rightsDeterminSet modify="1" toFOREACH="8" fromFOREACH="1"
 						      usertype="#{userControl.userController.userType}" />
 			    <h3>User's related telescopes</h3>
-			    <h:panelGrid id="telescopeLists" columns="1" cellpadding="2">
-			    <p:dataGrid value="#{telescopeControlSelection.controller.telescopeList}" 
-					paginator="true" pageLinks="8" paginatorPosition="top"
+			    <h:panelGrid id="telescopeLists" columns="2" cellpadding="2">
+			
+				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
+					paginator="true" pageLinks="5" paginatorPosition="top"
 					lazy="true" style=" text-align:  left; width: 40%;"
-					columns="2" rows="15" 
+					columns="1" rows="5" 
+					var="t" >
+			        <f:facet name="header">For User</f:facet>
+				<p:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
+				    <p:ajax event="click" listener="#{telescopeControlSelection.selectTelescope(t)}"  />
+				</p:commandLink> 
+				</p:dataGrid>
+				
+			    <p:dataGrid value="#{telescopeControlSelection.controller.telescopeList}" 
+					paginator="true" pageLinks="5" paginatorPosition="top"
+					lazy="true" style=" text-align:  left; width: 40%;"
+					columns="1" rows="5" 
 					var="t" >
 			        <f:facet name="header">Available</f:facet>
 				<h:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
@@ -62,17 +74,6 @@
 				</h:commandLink> 
 				</p:dataGrid>
 			    
-			
-				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
-					paginator="true" pageLinks="8" paginatorPosition="top"
-					lazy="true" style=" text-align:  left; width: 40%;"
-					columns="1" rows="15" 
-					var="t" >
-			        <f:facet name="header">For User</f:facet>
-				<p:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
-				    <p:ajax event="click" listener="#{telescopeControlSelection.selectTelescope(t)}"  />
-				</p:commandLink> 
-				</p:dataGrid>
 			    
 			    </h:panelGrid>
 			
