@@ -17,6 +17,7 @@ import pns.kiam.sweb.controllers.user.UserController;
  */
 @Named
 @RequestScoped
+
 public class UserControl {
 
     @Inject
@@ -33,6 +34,9 @@ public class UserControl {
 	User u = new User();
 	u.setEmail(userController.getLogin());
 	u.setPassword(userController.getPassw());
+	u.setComment(userController.getComment());
+	u.setIsActive(userController.isActive());
+	u.setUserType(userController.getUserType());
     }
 
     public void generateRNDPW() {

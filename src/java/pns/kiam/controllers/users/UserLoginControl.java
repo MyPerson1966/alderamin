@@ -75,7 +75,6 @@ public class UserLoginControl implements Serializable {
      */
     public boolean isLoginned() {
 	ssessionCTRL.init();
-	System.out.println("       (ssessionCTRL.getSession().getAttribute(\"loginned\") == null) " + (ssessionCTRL.getSession().getAttribute("loginned") == null));
 	if (ssessionCTRL.getSession().getAttribute("loginned") != null) {
 	    return (Boolean) ssessionCTRL.getSession().getAttribute("loginned");
 	}

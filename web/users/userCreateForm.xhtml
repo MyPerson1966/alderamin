@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -42,9 +44,38 @@
 			    </div>
 			</h:panelGrid>
 			
-                        <h:panelGrid columns="3" cellpadding="5">
-			    тут должны светиться права юзера в 1 столбец<br />
-			    их надо брать из таблицы прав
+                        <h:panelGrid columns="1" cellpadding="5" style=" width:  100%">
+			    <h3>User's rights</h3>
+			    <ezcomp:rightsDeterminSet modify="1" toFOREACH="8" fromFOREACH="1"
+						      usertype="#{userControl.userController.userType}" />
+			    <h3>User's related telescopes</h3>
+			    <h:panelGrid id="telescopeLists" columns="1" cellpadding="2">
+			    <p:dataGrid value="#{telescopeControlSelection.controller.telescopeList}" 
+					paginator="true" pageLinks="8" paginatorPosition="top"
+					lazy="true" style=" text-align:  left; width: 40%;"
+					columns="2" rows="15" 
+					var="t" >
+			        <f:facet name="header">Available</f:facet>
+				<h:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
+				    <p:ajax event="click" listener="#{telescopeControlSelection.selectTelescope(t)}"  
+					    update="@form:telescopeLists:userTelescopeList"/>
+				</h:commandLink> 
+				</p:dataGrid>
+			    
+			
+				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
+					paginator="true" pageLinks="8" paginatorPosition="top"
+					lazy="true" style=" text-align:  left; width: 40%;"
+					columns="1" rows="15" 
+					var="t" >
+			        <f:facet name="header">For User</f:facet>
+				<p:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
+				    <p:ajax event="click" listener="#{telescopeControlSelection.selectTelescope(t)}"  />
+				</p:commandLink> 
+				</p:dataGrid>
+			    
+			    </h:panelGrid>
+			
 			</h:panelGrid>
 		    </h:form>
 		</td>
