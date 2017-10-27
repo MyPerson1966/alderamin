@@ -5,18 +5,10 @@
  */
 package pns.kiam.controllers.app;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.ejb.EJB;
-import javax.ejb.Schedule;
 import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import pns.kiam.sweb.controllers.app.SsessionControl;
-import pns.kiam.sweb.controllers.app.XXParserSWEB;
 
 /**
  *
@@ -29,32 +21,34 @@ public class AppSessTimerControl {
     private SsessionControl ssessionCTRL;
     private boolean mustDelogin = false;
 
-    @Schedule(dayOfWeek = "*", month = "*", hour = "*", dayOfMonth = "*", year = "*", minute = "*", second = "*/5", persistent = true)
+    // @Schedule(dayOfWeek = "*", month = "*", hour = "*", dayOfMonth = "*", year = "*", minute = "*", second = "*/10", persistent = true)
     public void appTimer() {
 
-        long curr = System.currentTimeMillis();
-
-        System.out.println("   " + new Date() + "          ********>   ssessionCTRL.isActive()  " + ssessionCTRL.isActive() + "   '"
-                + "    ssessionCTRL.getSession() == null " + (ssessionCTRL.getSession() == null) + ""
-                + "           ssessionCTRL.isNeedToDelogin() " + ssessionCTRL.isNeedToDelogin()
-        );
-        //System.out.println(new Date() + "  !ssessionCTRL.isFinished() " + !ssessionCTRL.isFinished() + "   ssessionCTRL.getSession() == null " + (ssessionCTRL.getSession() == null));
-        try {
-            if (ssessionCTRL.isActive() && ssessionCTRL.getSession() != null) {
-                long last = ssessionCTRL.getSession().getLastAccessedTime();
-                int duration = ssessionCTRL.getSession().getMaxInactiveInterval() * 1000;
-                long finMoment = last + duration;
-                long rest = (finMoment - curr) / 1000;
-                if (rest < 40) {
-                    ssessionCTRL.setNeedToDelogin(true);
-                }
-                System.out.println("Timer event: " + new Date() + " last  " + new Date(last)
-                        + "   duration: " + duration
-                        + "   curr " + curr
-                        + "   finMoment: " + finMoment + "  rest: " + rest);
-            }
-        } catch (IllegalStateException e) {
-        }
+	long curr = System.currentTimeMillis();
+	if (curr / 10000 % 3 == 0) {
+	    System.out.println("   " + new Date() + "   ssessionCTRL.isActive()  " + ssessionCTRL.isActive() + "   '"
+		    + "   ssessionCTRL.getSession() == null " + (ssessionCTRL.getSession() == null) + System.lineSeparator()
+		    + "   ssessionCTRL.isNeedToDelogin() " + ssessionCTRL.isNeedToDelogin()
+	    );
+	}
+	//System.out.println(new Date() + "  !ssessionCTRL.isFinished() " + !ssessionCTRL.isFinished() + "   ssessionCTRL.getSession() == null " + (ssessionCTRL.getSession() == null));
+	try {
+	    if (ssessionCTRL.isActive() && ssessionCTRL.getSession() != null) {
+		long last = ssessionCTRL.getSession().getLastAccessedTime();
+		int duration = ssessionCTRL.getSession().getMaxInactiveInterval() * 1000;
+		long finMoment = last + duration;
+		long rest = (finMoment - curr) / 1000;
+		if (rest < 100) {
+		    System.out.println("==========================<<<<<100");
+		    ssessionCTRL.setNeedToDelogin(true);
+		}
+//		System.out.println("--->>" + new Date() + " last  " + new Date(last)
+//			+ "     duration: " + duration + System.lineSeparator()
+//			+ "     curr " + curr
+//			+ "     finMoment: " + finMoment + "  rest: " + rest);
+	    }
+	} catch (IllegalStateException e) {
+	}
     }
 
 }

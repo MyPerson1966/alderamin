@@ -21,6 +21,24 @@
     <listener>
 	<listener-class>pns.kiam.sweb.controllers.app.SsessionControl</listener-class>
     </listener>
+    
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/index.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>500</exception-type>
+        <location>/index.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>400</exception-type>
+        <location>/index.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>404</exception-type>
+        <location>/index.xhtml</location>
+    </error-page>
+    
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
