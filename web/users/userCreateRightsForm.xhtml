@@ -16,8 +16,9 @@
 		    
                     <h:form id="newUserForm" styleClass="mainforms">
 			<h3>Add new User Dialog System  step #{userControl.step}</h3>
-			<h3>User's related telescopes</h3>
-			    
+			<h3></h3>
+			 <p:panel style=" text-align: center" header="User's related telescopes">
+			       
                         <h:panelGrid columns="2" cellpadding="5" style=" width:  100%">
 			    
 				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
@@ -41,12 +42,32 @@
 					update="@form:userTelescopeList"/>
 				</h:commandLink> 
 				</p:dataGrid>
-				<p:commandButton value="Create User" action="#{userControl.createUser()}" />
 			    
 			    
 			</h:panelGrid>
+			 </p:panel>
+			
+			<p:panel style=" text-align: center" header="User's related rights">
+			    <ezcomp:rightsDeterminSet fromFOREACH="1" toFOREACH="8"
+						      modify="1" usertype="#{userControl.userController.userType}"
+						      pos="1" />
+
+			</p:panel>
+			
+                        <h:panelGrid columns="2" cellpadding="5" style=" width:  100%">
+				<p:commandButton value="Create User" action="#{userControl.createUser()}" />
+			</h:panelGrid>
+			
 			   
 		    </h:form>
+		</td>
+		<td>
+		    <p:panel header=" User info: ">
+			<p:outputLabel value="Login: #{userControl.userController.login}" /> <br />
+			<p:outputLabel value="Email: #{userControl.userController.email}" /> <br />
+			<p:outputLabel value="Password: #{userControl.userController.passw}" /> <br />
+			<p:outputLabel value="Active: #{userControl.userController.active}" /> <br />
+		    </p:panel>
 		</td>
 	    </tr>
 	</table>
