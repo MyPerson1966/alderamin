@@ -5,7 +5,7 @@
     margin: 10px;
     border-radius: 10px;
     background: #fffffc;
-    box-shadow: 0 10 10px rgba(0,220,220,0.8);
+    box-shadow: 0 10px 10px rgba(0,100,100,0.8);
 }
 .selectedrow{
     background: #ccffcc;

@@ -49,12 +49,11 @@
 			    <ezcomp:rightsDeterminSet modify="1" toFOREACH="8" fromFOREACH="1"
 						      usertype="#{userControl.userController.userType}" />
 			    <h3>User's related telescopes</h3>
-			    <h:panelGrid id="telescopeLists" columns="2" cellpadding="2">
+			    <h:panelGrid id="telescopeLists" columns="2" cellpadding="5">
 			
 				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
 					paginator="true" pageLinks="5" paginatorPosition="top"
-					lazy="true" style=" text-align:  left; width: 40%;"
-					columns="1" rows="5" 
+					lazy="true" columns="1" rows="5" 
 					var="t" >
 			        <f:facet name="header">For User</f:facet>
 				<p:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
@@ -64,8 +63,7 @@
 				
 			    <p:dataGrid value="#{telescopeControlSelection.controller.telescopeList}" 
 					paginator="true" pageLinks="5" paginatorPosition="top"
-					lazy="true" style=" text-align:  left; width: 40%;"
-					columns="1" rows="5" 
+					lazy="true" columns="1" rows="5" 
 					var="t" >
 			        <f:facet name="header">Available</f:facet>
 				<h:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
@@ -73,10 +71,10 @@
 					    update="@form:telescopeLists:userTelescopeList"/>
 				</h:commandLink> 
 				</p:dataGrid>
-			    
+			    <h:commandButton value="Create User" action="#{userControl.createUser()}"  ></h:commandButton>
 			    
 			    </h:panelGrid>
-			
+			    
 			</h:panelGrid>
 		    </h:form>
 		</td>
