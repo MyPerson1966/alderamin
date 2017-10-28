@@ -14,6 +14,8 @@
 		<td>
 		    
                     <h:form id="newUserForm" styleClass="mainforms">
+			<h3>Add new User Dialog System  step #{userControl.step} </h3>
+			 
                         <h:panelGrid columns="2" cellpadding="5">
                         <h:panelGrid columns="4" cellpadding="5">
 			    
@@ -22,12 +24,18 @@
                                          validatorMessage="TEST!"  requiredMessage="Value required"/>
 			    <p:message for="newlogin" />
 			    <br />
+			     
+			    <p:outputLabel value="Email" />
+			    <p:inputText id="newemail" value="#{userControl.userController.email}" required="true" 
+                                         validatorMessage="TEST!"  requiredMessage="Value required"/>
+			    <p:message for="newemail" />
+			    <br />
 			    
 			    <p:outputLabel value="Password" />
 			    	<p:inputText id="newpassword" value="#{userControl.userController.passw}" required="true" 
                                          validatorMessage="TEST!"  requiredMessage="Value required"/>
 				<h:commandButton value="Another password">
-				    <p:ajax event="click" listener="#{userControl.generateRNDPW()}" update="newpassword" />
+				    <p:ajax event="click" listener="#{userControl.generateRNDPW()}" update="newlogin newpassword" />
 				</h:commandButton>
 			    <p:message for="newpassword" />
 			    
@@ -35,7 +43,7 @@
 			    <p:inputTextarea id="comm" value="#{userControl.userController.comment}" rows="4"/>
 			    <p:message for="comm" />
 			    <br />
-			    
+			    <br />
 			    
 			</h:panelGrid>
 			    <div>
@@ -44,38 +52,8 @@
 			    </div>
 			</h:panelGrid>
 			
-                        <h:panelGrid columns="1" cellpadding="5" style=" width:  100%">
-			    <h3>User's rights</h3>
-			    <ezcomp:rightsDeterminSet modify="1" toFOREACH="8" fromFOREACH="1"
-						      usertype="#{userControl.userController.userType}" />
-			    <h3>User's related telescopes</h3>
-			    <h:panelGrid id="telescopeLists" columns="2" cellpadding="5">
 			
-				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
-					paginator="true" pageLinks="5" paginatorPosition="top"
-					lazy="true" columns="1" rows="5" 
-					var="t" >
-			        <f:facet name="header">For User</f:facet>
-				<p:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
-				    <p:ajax event="click" listener="#{telescopeControlSelection.selectTelescope(t)}"  />
-				</p:commandLink> 
-				</p:dataGrid>
-				
-			    <p:dataGrid value="#{telescopeControlSelection.controller.telescopeList}" 
-					paginator="true" pageLinks="5" paginatorPosition="top"
-					lazy="true" columns="1" rows="5" 
-					var="t" >
-			        <f:facet name="header">Available</f:facet>
-				<h:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >
-				    <p:ajax event="click" listener="#{telescopeControlSelection.selectTelescope(t)}"  
-					    update="@form:telescopeLists:userTelescopeList"/>
-				</h:commandLink> 
-				</p:dataGrid>
-			    <h:commandButton value="Create User" action="#{userControl.createUser()}"  ></h:commandButton>
-			    
-			    </h:panelGrid>
-			    
-			</h:panelGrid>
+			<p:commandButton value="Next" action="#{userControl.nextConversation()}"   ></p:commandButton>
 		    </h:form>
 		</td>
 	    </tr>

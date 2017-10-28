@@ -46,4 +46,10 @@ public class TelescopeControlSelection {
 	System.out.println("   Size of userControl.getUserController().getTelescopeList() " + userControl.getUserController().getTelescopeList().size());
 	userControl.getUserController().getTelescopeList().add(t);
     }
+
+    public void deSelectTelescope(Telescope t) {
+	System.out.println("   deSelected " + t);
+	System.out.println("   Size of userControl.getUserController().getTelescopeList() " + userControl.getUserController().getTelescopeList().size());
+	userControl.getUserController().getTelescopeList().remove(t);
+    }
 }

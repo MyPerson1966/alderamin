@@ -2,8 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -12,13 +11,7 @@
 
 	    
             <ui:define name="content">
-		<h1>  step #{userControl.step}</h1>
-		<c:if test="#{userControl.step==1}">
-		<ui:include src="/users/userCreateLoginForm.xhtml"/>
-		</c:if>
-		<c:if test="#{userControl.step==2}" >
-		      <ui:include src="/users/userCreateRightsForm.xhtml"/>
-		</c:if>
+		<ui:include src="/users/userCreateRightsForm.xhtml"/>
             </ui:define>
             <ui:define name="right">
 		<ui:include src="/menu/vertMenu.xhtml" />
