@@ -12,13 +12,7 @@
 
 	    
             <ui:define name="content">
-		<h1>  step #{userControl.step}</h1>
-		<c:if test="#{userControl.step==1}">
 		<ui:include src="/users/userCreateLoginForm.xhtml"/>
-		</c:if>
-		<c:if test="#{userControl.step==2}" >
-		      <ui:include src="/users/userCreateRightsForm.xhtml"/>
-		</c:if>
             </ui:define>
             <ui:define name="right">
 		<ui:include src="/menu/vertMenu.xhtml" />

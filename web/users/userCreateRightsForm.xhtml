@@ -9,10 +9,9 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-	<table width="800" align="center">
-	
-	    <tr>
-		<td>
+	<table  style="width: 850px;" align="center">
+	    <tr valign="top">
+		<td style="width: 700px;">
 		    
                     <h:form id="newUserForm" styleClass="mainforms">
 			<h3>Add new User Dialog System  step #{userControl.step}</h3>
@@ -23,7 +22,7 @@
 			    
 				<p:dataGrid id="userTelescopeList" value="#{userControl.userController.telescopeList}" 
 					paginator="true" pageLinks="5" paginatorPosition="top"
-					lazy="true" columns="1" rows="8" 
+					lazy="true" columns="1" rows="5" 
 					var="t" >
 				    <f:facet name="header">For User</f:facet>
 				    <p:commandLink value="#{t.identifier}  #{t.name} #{t.location}" >

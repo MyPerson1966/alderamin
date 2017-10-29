@@ -16,22 +16,28 @@
 
 #left {
     float: left;
-    background: #ccccff;
+    background: #cccccc;
     padding: 5px;
     width: 300px;
 }
 
 #right {
-    
-    background: #ccccff;
+    background: #cccccc;
     padding: 5px;
     width: 250px;
+    border-style:  ridge;
+    border-left: 3px;
+    border-left-color: #00b4b4;
+    border-bottom:  2px;
+    border-bottom-color:   #00b4b4;
+    margin: 5px;
 }
 
 .center_content {
     position: relative;
     background-color: #dddddd;
     padding: 5px;
+    margin: 5px;
 }
 
 .left_content {
@@ -44,6 +50,11 @@
     background-color: #dddddd;
     padding: 5px;
     margin: 0px 170px 0px 170px;
+    border-style:  ridge;
+    border-left: 3px;
+    border-left-color: #00b4b4;
+    border-bottom:  2px;
+    border-bottom-color:   #00b4b4;
 }
 
 #top a:link, #top a:visited {

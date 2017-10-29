@@ -19,9 +19,9 @@
     <cc:implementation>
 	
 	<c:if test="#{cc.attrs.modify==1}">
-	    <p:commandLink id="editLNK" value="  #{cc.attrs.usertype.createCharByInt( cc.attrs.usertype.binRights.charAt(cc.attrs.usertype.binRightsLen-pos)) } #{cc.attrs.usertype.bitName(pos)}  "  >
+	    <h:commandLink id="editLNK" value="  #{cc.attrs.usertype.createCharByInt( cc.attrs.usertype.binRights.charAt(cc.attrs.usertype.binRightsLen-pos)) } #{cc.attrs.usertype.bitName(pos)}  "  >
 		<p:ajax event="click"  listener="#{cc.attrs.usertype.changeBit(cc.attrs.pos)}" update="@this" />
-	    </p:commandLink>
+	    </h:commandLink>
 	</c:if>
 	
 	<c:if test="#{cc.attrs.modify==0}">

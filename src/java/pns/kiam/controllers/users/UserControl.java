@@ -13,7 +13,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import pns.kiam.entities.telescopes.Telescope;
 import pns.kiam.entities.users.User;
 import pns.kiam.sweb.controllers.user.UserController;
 
@@ -47,16 +46,18 @@ public class UserControl implements Serializable {
 
     public void createUser() {
 	System.out.println("      userController.getTelescopeList().size() " + userController.getTelescopeList().size());
-	for (int k = 0; k < userController.getTelescopeList().size(); k++) {
-	    Telescope tmp = userController.getTelescopeList().get(k);
-	    System.out.println("                 tmp  " + tmp);
-	}
+//	user.setUserTelescopeList(userController.getTelescopeList());
+//	userController.persistUser(user);
+//	for (int k = 0; k < userController.getTelescopeList().size(); k++) {
+//	    Telescope tmp = userController.getTelescopeList().get(k);
+//	    System.out.println("                 tmp  " + tmp);
+//	}
 
     }
 
     public void generateRNDPW() {
 	userController.generatePW(true);
-	System.out.println("     userController.getPassw()   " + userController.getPassw() + "     userController.getLogin() " + userController.getLogin());
+	//System.out.println("     userController.getPassw()   " + userController.getPassw() + "     userController.getLogin() " + userController.getLogin());
     }
 
     public String nextConversation() {

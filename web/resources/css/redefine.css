@@ -1,5 +1,59 @@
-.ui-tooltip {
-    background: #555550;
-    color: #fffffc;
-    box-shadow: 0 0 20px rgba(100,0,0,0.5); 
+
+
+.ui-widget{
+    background: #fffffe  !important; 
 }
+.ui-widget-content{
+    background: #ffffef !important; 
+}
+.ui-datatable-header{
+    background: #fffff0  !important; 
+}
+.ui-button,  .ui-commandlink {
+    padding-left: 2px   !important;
+    padding-right:2px   !important;
+    background: #f3f2f3 !important;
+    color: #009393 !important; 
+}
+.ui-button:hover ,  .ui-commandlink:hover {
+    box-shadow: 0 5px 5px rgba(0,110,110,0.9)  !important;
+    color: #004343 !important;
+}
+
+.ui-paginator-page, .ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last{
+    padding-left: 15px   !important;
+    padding-right:15px   !important;
+    background: #e5e5e5 !important;
+    color: #009393 !important;
+    border: none;
+}
+.ui-paginator-page:hover, .ui-paginator-first:hover, .ui-paginator-prev:hover, .ui-paginator-next:hover, .ui-paginator-last:hover{
+    box-shadow: 0 0px 5px rgba(0,110,110,0.7)  !important;
+    color: #004343 !important;
+}
+
+.ui-tooltip {
+    margin: -2px !important;
+    padding: 8px !important;
+    border-radius: 3px !important;
+    font-weight: bold !important;
+    background: #555550  !important;
+    color: #fffffc !important;
+    box-shadow: 0 10px 10px rgba(0,110,110,0.8)  !important;
+}
+
+.ui-menubar  {
+    background: #fffff0 !important;
+    color: #ffffff !important;
+    font-weight: bolder !important;
+}
+.ui-menuitem{
+    margin-right: 5px !important;
+}
+.ui-paginator .ui-paginator-top {
+    background: #fffff0  !important; 
+}
+.ui-paginator {
+    background: #e3e3e3  !important; 
+}
+

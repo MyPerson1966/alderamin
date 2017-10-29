@@ -3,27 +3,45 @@ body {
     font-size: 12px;
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #000000;  
-    margin: 10px;
+    margin: 0px;
 }
 
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     border-bottom: 1px solid #AFAFAF; 
-    font-size:  16px;
+    font-size:  18px;
+    font-weight: bolder;
+    margin: 5px;
+    padding: 0px;
+    color: #D20000;
+}
+h2 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  15px;
     font-weight: bold;
     margin: 0px;
     padding: 0px;
-    color: #D20005;
+    color: #D20000;
 }
 
+th {
+  color: #00b5b5 !important;
+  background: #e0e0e0!important;
+  font-weight:  bolder!important;
+}
 a:link, a:visited {
-  color: #045491;
+  color:  #008888;
+  padding: 5px;
   font-weight : bold;
   text-decoration: none;
 }
 
 a:link:hover, a:visited:hover  {
-  color: #045491;
+  color: #aaaaa0;
+  padding: 5px;
   font-weight : bold;
   text-decoration : underline;
+  background: #e3e3e3;
+  box-shadow: 0 0 10px rgba(0,100,100,0.8)  !important;
 }

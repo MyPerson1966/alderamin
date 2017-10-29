@@ -9,51 +9,53 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-	<table width="800" align="center">
+	<table width="500" align="center">
 	    <tr>
 		<td>
 		    
                     <h:form id="newUserForm" styleClass="mainforms">
 			<h3>Add new User Dialog System  step #{userControl.step} </h3>
 			 
-                        <h:panelGrid columns="2" cellpadding="5">
-                        <h:panelGrid columns="4" cellpadding="5">
+                        <h:panelGrid columns="3" cellpadding="10">
 			    
 			    <p:outputLabel value="Login" />
 			    <p:inputText id="newlogin" value="#{userControl.userController.login}" required="true" 
-                                         validatorMessage="TEST!"  requiredMessage="Value required"/>
+                                         validatorMessage="IncorrectValue"  requiredMessage="Value required"/>
 			    <p:message for="newlogin" />
-			    <br />
 			     
 			    <p:outputLabel value="Email" />
 			    <p:inputText id="newemail" value="#{userControl.userController.email}" required="true" 
-                                         validatorMessage="TEST!"  requiredMessage="Value required"/>
+                                         validatorMessage="Incorrect  Value"  requiredMessage="Value required">
+				<f:validateRegex  pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			    </p:inputText>
 			    <p:message for="newemail" />
-			    <br />
-			    
+			</h:panelGrid>
+			<h:panelGrid columns="4" cellpadding="10">
+			
 			    <p:outputLabel value="Password" />
-			    	<p:inputText id="newpassword" value="#{userControl.userController.passw}" required="true" 
-                                         validatorMessage="TEST!"  requiredMessage="Value required"/>
-				<h:commandButton value="Another password">
+			    <p:inputText id="newpassword" value="#{userControl.userController.passw}" required="true" 
+                                validatorMessage="IncorrectValue"  requiredMessage="Value required"/>
+			    <h:commandButton value="Another password">
 				    <p:ajax event="click" listener="#{userControl.generateRNDPW()}" update="newlogin newpassword" />
-				</h:commandButton>
+			    </h:commandButton>
 			    <p:message for="newpassword" />
-			    
+			 
+			</h:panelGrid>
+			<h:panelGrid columns="3" cellpadding="10">
+			
 			    <p:outputLabel value="Comment" />
 			    <p:inputTextarea id="comm" value="#{userControl.userController.comment}" rows="4"/>
 			    <p:message for="comm" />
-			    <br />
-			    <br />
-			    
 			</h:panelGrid>
-			    <div>
+			
+			<h:panelGrid columns="2" cellpadding="10">
 			    <p:outputLabel value="Active  &nbsp; &nbsp; " />
 			    <p:selectBooleanCheckbox id="act" value="#{userControl.userController.active}" />
-			    </div>
 			</h:panelGrid>
 			
-			
-			<p:commandButton value="Next" action="#{userControl.nextConversation()}"   ></p:commandButton>
+			<h:panelGrid columns="2" cellpadding="5">
+			    <p:commandButton value="Next" action="#{userControl.nextConversation()}"   ></p:commandButton>
+			</h:panelGrid>
 		    </h:form>
 		</td>
 	    </tr>
