@@ -10,7 +10,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import pns.kiam.controllers.users.UserControl;
 import pns.kiam.entities.telescopes.Telescope;
 import pns.kiam.sweb.controllers.telescope.TelescopeController;
 
@@ -24,8 +23,9 @@ public class TelescopeControlSelection {
 
     @EJB
     private TelescopeController controller;
+
     @Inject
-    private UserControl userControl;
+//    private UserControl userControl;
 
     /**
      * Creates a new instance of TelescopeControlSelection
@@ -43,13 +43,13 @@ public class TelescopeControlSelection {
 
     public void selectTelescope(Telescope t) {
 	System.out.println("   Selected " + t);
-	System.out.println("   Size of userControl.getUserController().getTelescopeList() " + userControl.getUserController().getTelescopeList().size());
-	userControl.getUserController().getTelescopeList().add(t);
+//	System.out.println("   Size of userControl.getUserController().getTelescopeList() " + userControl.getUserController().getTelescopeList().size());
+//	userControl.getUserController().getTelescopeList().add(t);
     }
 
     public void deSelectTelescope(Telescope t) {
 	System.out.println("   deSelected " + t);
-	System.out.println("   Size of userControl.getUserController().getTelescopeList() " + userControl.getUserController().getTelescopeList().size());
-	userControl.getUserController().getTelescopeList().remove(t);
+//	System.out.println("   Size of userControl.getUserController().getTelescopeList() " + userControl.getUserController().getTelescopeList().size());
+//	userControl.getUserController().getTelescopeList().remove(t);
     }
 }
