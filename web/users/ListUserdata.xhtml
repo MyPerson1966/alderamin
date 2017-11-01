@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+	
+	
+        <h:form id="UserTableForm">
+            
+        
+            <p:commandLink value="Create User"  styleClass="commandbutton">
+                
+		<p:ajax event="click" listener="#{userAdminControl.prepareCreation()}"
+			update=":UserTableForm :msgForm:msgsInfo" 
+			oncomplete="PF('UserTable').paginator.setPage(PF('UserTable').paginator.cfg.pageCount - 1);"
+	
+                />
+            </p:commandLink> ||  
+            <p:commandLink id="deselectUser" value="Deselect User" disabled="#{userAdminControl.controller.user==null }" >
+                <p:ajax event="click" listener="#{userAdminControl.rowDeSelect()}"
+                    update=":UserTableForm  :msgForm:msgsInfo"
+                />
+            </p:commandLink> ||
+            <p:commandLink value="Fix New UserData data" >
+                <p:ajax event="click" listener="#{userAdminControl.controller.fixAllAdded()}"
+                    update=":UserTableForm  :msgForm:msgsInfo"
+                />
+            </p:commandLink>
+            
+            <p:dataTable id="UserTable" widgetVar="UserTable" value="#{userAdminControl.controller.userList}" var="u" 
+			 resizableColumns="true"
+			  
+			 rows="10" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,10,15,20, 25,30"
+			 editable="true">
+		
+                <p:ajax event="rowEdit" listener="#{userAdminControl.controller.onRowEdit}" update=":msgForm:msgsInfo" />
+                <p:ajax event="rowEditCancel" listener="#{userAdminControl.controller.onRowCancel}" update=":msgForm:msgsInfo" />
+		<f:facet name="header">
+               
+		    <p:outputPanel> USERS
+			<h:outputText value="Search all fields:" />
+			<p:inputText id="globalFilter" styleClass="globalsearchField" onkeyup="PF('UserTable').filter()" 
+				     placeholder="Enter keyword"/>		   </p:outputPanel>
+                </f:facet>
+                
+                <p:column style="width: 15px;background: #ffffcc">
+                    <p:rowEditor   />
+                </p:column>
+		
+                <p:column headerText="LOGIN" width="60" styleClass="tablefield"
+			  filterBy="#{u.login}" sortBy="#{u.login}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:tooltip  for="loginOut" value="#{u.login} "  trackMouse="true"  />
+			    <h:outputText id="loginOut" value="#{u.login}" 
+							     />
+			</f:facet>
+                        <f:facet name="input"><p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+		
+                <p:column headerText="PASSWORD" width="70"  styleClass="tablefield"
+			  filterBy="#{u.password}" sortBy="#{u.password}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:tooltip  for="passwOut" value="#{u.password} "  trackMouse="true"  />
+			    <h:outputText id="passwOut" value="#{u.password}" 
+							     />
+			</f:facet>
+                        <f:facet name="input"><p:inputText id="passwedit" value="#{u.password}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+		
+                <p:column headerText="EMAIL" width="110"  styleClass="tablefield"
+			  filterBy="#{u.email}" sortBy="#{u.email}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:tooltip  for="emailOut" value="#{u.email} "  trackMouse="true"  />
+			    <h:outputText id="emailOut" value="#{u.email}" 
+							     />
+			</f:facet>
+                        <f:facet name="input"><p:inputText id="emailedit" value="#{u.email}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+		
+                <p:column headerText="IS ACTIVE" width="60" styleClass="tablefield"
+			  filterBy="#{u.isActive}" sortBy="#{u.isActive}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <h:outputText id="isactiveOut" value="#{u.isActive}" 
+							     />
+			</f:facet>
+                        <f:facet name="input"><p:selectBooleanCheckbox  id="isactiveedit" value="#{u.isActive}" styleClass="editField" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+		
+                <p:column headerText="RIGHTS" width="280" styleClass="tablefield"
+			  filterBy="#{u.userType.name}" sortBy="#{u.userType.rights}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output"> 
+			    <p:panel header="#{u.userType.name}">
+			    <ezcomp:rightsDeterminSet fromFOREACH="1" toFOREACH="8"
+						      modify="0" pos="1" usertype="#{u.userType}" />
+			    </p:panel>
+			    <p:panel>
+			
+			    </p:panel>
+			</f:facet>
+                        <f:facet name="input">
+			    <!--<p:inputText id="utedit" value="#{u.userType.id}" styleClass="editField" />-->
+			    <p:panel header="Edit #{u.userType.name}">
+			    <h:selectOneMenu value="#{u.userType.id}" style="width:80%" required="true">
+				<f:selectItem itemLabel="Select User's Rights" itemValue="" noSelectionOption="true" />
+                
+				<f:selectItems value="#{userTypeControl.controller.userTypeList}" var="ut" 
+					       itemLabel="#{ut.name}  #{ut.rights} #{ut.id}" itemValue="#{ut.id}" />
+			    </h:selectOneMenu>
+			    </p:panel>
+			    <p:panel>
+				<!--
+    
+        <h3>Grouped</h3>
+    <p:selectManyCheckbox id="grid3" value="#{checkboxView.selectedCars}" layout="pageDirection" columns="1">
+        <f:selectItems value="#{checkboxView.cars}" var="car" itemLabel="#{car}" itemValue="#{car}" />
+    </p:selectManyCheckbox>
+ 
+    <p:separator />
+    
+				<h3>Responsive</h3>
+				<p:selectManyCheckbox id="grid2" value="#{u.userTelescopeList}" 
+						      layout="pageDirection" columns="3" style=" height: 60px; overflow: scroll">
+				    <f:selectItems value="#{telescopeControl.controller.telescopeList}" 
+						   var="tls" itemLabel="#{tls.identifier}   #{tls.shortName}  " 
+						   itemValue="#{tls.id}" />
+				</p:selectManyCheckbox>
+				-->
+ 
+				<p:dataGrid value="#{telescopeControl.controller.telescopeList}"  style=" width: 100%"
+					    var="tls"  rows="4" columns="2" paginator="true"  pageLinks="3" paginatorPosition="TOP" >
+				            <f:facet name="header">
+						Telescopes Available
+					    </f:facet>
+				    <p:commandButton value="#{tls.identifier}   #{tls.shortName}">
+				    
+				    </p:commandButton>
+				    
+				</p:dataGrid>
+			    </p:panel>
+			</f:facet>
+                    </p:cellEditor>
+                </p:column>
+		<!-- -->
+		<p:column headerText="INSERTED MOMENT" width="110" styleClass="tablefield"
+			  filterBy="#{u.moment}" sortBy="#{ u.moment}">
+		    <f:facet name="filter">
+			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
+		    </f:facet>  
+		    <p:tooltip  for="momentOut" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(  u.moment)} "  trackMouse="true"  />
+		    <p:panel id="momentOut" style=" text-align: right; font-size: 10px;">
+			<h:outputText id="momentDateOut" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(u.moment)}" /><br />
+			<h:outputText id="momentTimeOut" value="#{userAdminControl.dateTimeUtil.longToSimpleTime(u.moment)}" />
+		    </p:panel>
+			
+                </p:column>
+		
+		
+	    </p:dataTable>
+	</h:form>
+    </h:body>
+</html>
+

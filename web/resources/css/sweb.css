@@ -1,4 +1,10 @@
-
+.tablefield{
+    font-size: 10px;
+    padding-left: 20px;
+    border-color: #00b4b4;
+    border-left-style: double;
+    border-left-width: 2px;
+}
 .mainforms{
     text-align: center;
     padding: 15px;
