@@ -129,27 +129,25 @@
 			</f:facet>
                         <f:facet name="input">
 			    <!--<p:inputText id="utedit" value="#{u.userType.id}" styleClass="editField" />-->
-			    <p:panel header="Edit #{u.userType.name}">
+			    <p:panel header="Edit User's Rights">
 			    <h:selectOneMenu value="#{u.userType.id}" style="width:80%" required="true">
 				<f:selectItem itemLabel="Select User's Rights" itemValue="" noSelectionOption="true" />
                 
 				<f:selectItems value="#{userTypeControl.controller.userTypeList}" var="ut" 
-					       itemLabel="#{ut.name}  #{ut.rights} #{ut.id}" itemValue="#{ut.id}" />
+					       itemLabel="#{ut.name} " itemValue="#{ut.id}" />
 			    </h:selectOneMenu>
 			    </p:panel>
-			    <p:panel>
-				<p:dataGrid value="#{telescopeControl.controller.telescopeList}"  style=" width: 100%"
-					    var="tls"  rows="3" columns="2" paginator="true"  pageLinks="3" paginatorPosition="TOP" >
-				            <f:facet name="header">
-						Telescopes Available
-					    </f:facet>
-				    
-				    <p:commandButton value="#{tls.identifier}   #{tls.shortName}" style=" width: 90%">
-					<p:ajax event="click" listener="#{userAdminControl.controller.addTelescopeToList(tls)}"
-						update="@form:UserTable:utPanel:utGrid" />
-				    </p:commandButton>
-				    
-				</p:dataGrid>
+			    <p:panel header="Edit User's Telescopes">
+                                
+                                <p:selectManyMenu id="advanced" style=" width:  100%" value="#{u.userTelescopeList}"
+                                        var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                        <f:selectItems value="#{telescopeControl.controller.telescopeList}" var="uts" itemLabel="#{uts.name}" itemValue="#{uts}" />
+                                        <p:column  style=" width:  80%">
+                                            <h:outputLabel style=" color: #008888"  value="#{t.name}" />
+                                        </p:column>
+                                        
+                                    </p:selectManyMenu>
+                                
 			    </p:panel>
 			</f:facet>
                     </p:cellEditor>
@@ -166,16 +164,7 @@
 			<h:outputText id="momentTimeOut" value="#{userAdminControl.dateTimeUtil.longToSimpleTime(u.moment)}" />
 		    </p:panel>
                     <p:panel id="utPanel">
-			<p:dataGrid id="utGrid" value="#{u.userTelescopeList}"  style=" width: 100%"
-				var="tls"  rows="3" columns="1" paginator="true"  pageLinks="3" paginatorPosition="top" >
-				    <f:facet name="header">
-					User' Telescopes
-				    </f:facet>
-			    <p:outputLabel value="#{tls.identifier}   #{tls.shortName}" style=" width: 98%">
-				    
-				    </p:outputLabel>
-				    
-				</p:dataGrid>
+                        
 			    </p:panel>
 			
                 </p:column>
