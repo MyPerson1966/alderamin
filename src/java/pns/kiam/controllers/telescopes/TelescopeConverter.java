@@ -8,10 +8,7 @@ package pns.kiam.controllers.telescopes;
 import java.io.Serializable;
 import java.util.StringTokenizer;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 
 /**
  *
@@ -24,7 +21,6 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import pns.kiam.entities.telescopes.Telescope;
-import pns.kiam.sweb.controllers.AbstractController;
 import pns.kiam.sweb.controllers.telescope.TelescopeController;
 
 @FacesConverter("telescopeConverter")
@@ -39,23 +35,23 @@ public class TelescopeConverter implements Converter, Serializable {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent component, String value) throws ConverterException {
-        long tID = 0;
-        if (value != null && value.trim().length() > 0) {
-            value = value.trim();
-            try {
-                String[] parts = value.split("\\{");
-                value = parts[1].split("\\}")[0];
+	long tID = 0;
+	if (value != null && value.trim().length() > 0) {
+	    value = value.trim();
+	    try {
+		String[] parts = value.split("\\{");
+		value = parts[1].split("\\}")[0];
 
-                ts = parseTelescopeString(value);
-                return ts;
-            } catch (NullPointerException ee) {
-                System.out.println("          v " + value);
-            }
-        } else {
-        }
-        System.out.println("          VVVv " + value + "   +tID  " + tID + "    ");
+		ts = parseTelescopeString(value);
+		return ts;
+	    } catch (NullPointerException ee) {
+		System.out.println("          v " + value);
+	    }
+	} else {
+	}
+	System.out.println("          VVVv " + value + "   +tID  " + tID + "    ");
 
-        return null;
+	return null;
     }
 
     @Override
@@ -65,107 +61,107 @@ public class TelescopeConverter implements Converter, Serializable {
 //        } else {
 //            return null;
 //        }
-        return null;
+	return null;
     }
 
     private Telescope parseTelescopeString(String s) {
-        int k = 0;
-        Telescope ts = new Telescope();
-        StringTokenizer st = new StringTokenizer(s, ",");
-        while (st.hasMoreTokens()) {
-            String tok = st.nextToken();
-            //System.out.println(k + "   " + tok);
+	int k = 0;
+	Telescope ts = new Telescope();
+	StringTokenizer st = new StringTokenizer(s, ",");
+	while (st.hasMoreTokens()) {
+	    String tok = st.nextToken();
+	    //System.out.println(k + "   " + tok);
 
-            String[] tokParts = tok.split("=");
-            try {
-                if (k == 0) {
-                    try {
-                        long id = Long.parseLong(tokParts[1]);
-                        ts.setId(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 1) {
-                    try {
-                        long id = Long.parseLong(tokParts[1]);
-                        ts.setIdentifier(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 2) {
-                    try {
-                        ts.setLocation(tokParts[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 3) {
-                    try {
-                        ts.setName(tokParts[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 4) {
-                    try {
-                        double id = Double.parseDouble(tokParts[1]);
-                        ts.setX(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 5) {
-                    try {
-                        double id = Double.parseDouble(tokParts[1]);
-                        ts.setY(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 6) {
-                    try {
-                        double id = Double.parseDouble(tokParts[1]);
-                        ts.setZ(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 7) {
-                    try {
-                        double id = Double.parseDouble(tokParts[1]);
-                        ts.setHeight(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 8) {
-                    try {
-                        double id = Double.parseDouble(tokParts[1]);
-                        ts.setLatitude(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
+	    String[] tokParts = tok.split("=");
+	    try {
+		if (k == 0) {
+		    try {
+			long id = Long.parseLong(tokParts[1]);
+			ts.setId(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 1) {
+		    try {
+			long id = Long.parseLong(tokParts[1]);
+			ts.setIdentifier(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 2) {
+		    try {
+			ts.setLocation(tokParts[1]);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 3) {
+		    try {
+			ts.setName(tokParts[1]);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 4) {
+		    try {
+			double id = Double.parseDouble(tokParts[1]);
+			ts.setX(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 5) {
+		    try {
+			double id = Double.parseDouble(tokParts[1]);
+			ts.setY(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 6) {
+		    try {
+			double id = Double.parseDouble(tokParts[1]);
+			ts.setZ(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 7) {
+		    try {
+			double id = Double.parseDouble(tokParts[1]);
+			ts.setHeight(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 8) {
+		    try {
+			double id = Double.parseDouble(tokParts[1]);
+			ts.setLatitude(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
 
-                if (k == 9) {
-                    try {
-                        double id = Double.parseDouble(tokParts[1]);
-                        ts.setLongitude(id);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 10) {
-                    try {
-                        ts.setDescription(tokParts[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
-                if (k == 11) {
-                    try {
-                        ts.setComment(tokParts[1]);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                    }
-                }
+		if (k == 9) {
+		    try {
+			double id = Double.parseDouble(tokParts[1]);
+			ts.setLongitude(id);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 10) {
+		    try {
+			ts.setDescription(tokParts[1]);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
+		if (k == 11) {
+		    try {
+			ts.setComment(tokParts[1]);
+		    } catch (ArrayIndexOutOfBoundsException e) {
+		    }
+		}
 
-            } catch (NumberFormatException e) {
-            }
-            k++;
-        }
-        return ts;
-        /*
+	    } catch (NumberFormatException e) {
+	    }
+	    k++;
+	}
+	return ts;
+	/*
 Info:   0     id=2475
 Info:   1    identifier=10003
 Info:   2    location=Mondy
@@ -178,7 +174,7 @@ Info:   8    latitude=51.622227
 Info:   9    longitude=100.921765
 Info:   10    description=
 Info:   11    comment=
-         */
+	 */
 
     }
 }

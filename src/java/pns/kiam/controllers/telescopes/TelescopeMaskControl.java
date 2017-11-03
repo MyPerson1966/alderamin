@@ -37,7 +37,7 @@ public class TelescopeMaskControl {
     }
 
     public void prepareCreation() {
-	controller.prepareCreate();
+	controller.prepareCreation();
     }
 
     public void rowDeSelect() {

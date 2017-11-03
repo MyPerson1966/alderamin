@@ -105,7 +105,7 @@
                     </p:cellEditor>
                 </p:column>
 		
-                <p:column headerText="RIGHTS" width="290" styleClass="tablefield"
+                <p:column headerText="RIGHTS &amp; TELESCOPES" width="290" styleClass="tablefield"
 			  filterBy="#{u.userType.name}" sortBy="#{u.userType.rights}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
@@ -148,7 +148,7 @@
                     </p:cellEditor>
                 </p:column>
 		<!-- -->
-		<p:column headerText="INSERTED MOMENT" width="200" styleClass="tablefield"
+		<p:column headerText="INSERTED MOMENT" width="100" styleClass="tablefield"
 			  filterBy="#{u.moment}" sortBy="#{ u.moment}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
@@ -159,8 +159,7 @@
 			<h:outputText id="momentTimeOut" value="#{userAdminControl.dateTimeUtil.longToSimpleTime(u.moment)}" />
 		    </p:panel>
                     <p:panel id="utPanel">
-                        
-			    </p:panel>
+                    </p:panel>
 			
                 </p:column>
 		

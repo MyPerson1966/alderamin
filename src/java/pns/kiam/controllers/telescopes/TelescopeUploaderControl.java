@@ -9,7 +9,6 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Named;
-import org.primefaces.event.FileUploadEvent;
 import pns.kiam.sweb.controllers.telescope.TelescopeListUploaderController;
 
 /**
@@ -24,11 +23,11 @@ public class TelescopeUploaderControl {
     private TelescopeListUploaderController controller;
 
     public TelescopeListUploaderController getController() {
-        return controller;
+	return controller;
     }
 
     public void setController(TelescopeListUploaderController controller) {
-        this.controller = controller;
+	this.controller = controller;
     }
 
     public void upload() throws IOException {

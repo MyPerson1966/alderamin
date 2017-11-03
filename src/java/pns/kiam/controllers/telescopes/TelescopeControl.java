@@ -28,19 +28,19 @@ public class TelescopeControl {
     private XXParserSWEB xxparser;
 
     public TelescopeController getController() {
-        return controller;
+	return controller;
     }
 
     public void setController(TelescopeController controller) {
-        this.controller = controller;
+	this.controller = controller;
     }
 
     public void prepareCreation() {
-        controller.prepareCreation();
+	controller.prepareCreation();
     }
 
     public void rowDeSelect() {
-        controller.rowDeSelect();
+	controller.rowDeSelect();
     }
 
     /**
@@ -49,7 +49,7 @@ public class TelescopeControl {
      * @param event
      */
     public void onRowEdit(RowEditEvent event) {
-        controller.onRowEdit(event);
+	controller.onRowEdit(event);
     }
 
     /**
@@ -60,7 +60,7 @@ public class TelescopeControl {
      * @param all
      */
     public void removeRow(boolean all) {
-        controller.removeRow(all);
+	controller.removeRow(all);
     }
 
     /**
@@ -69,14 +69,14 @@ public class TelescopeControl {
      * @param event
      */
     public void onRowCancel(RowEditEvent event) {
-        controller.onRowCancel(event);
+	controller.onRowCancel(event);
     }
 
     /**
      * Row Select action
      */
     public void rowSelect() {
-        controller.rowSelect();
+	controller.rowSelect();
     }
 
     /**
@@ -85,12 +85,12 @@ public class TelescopeControl {
      * @param t
      */
     public void rowSelectAction(Telescope t) {
-        controller.rowSelectAction(t);
+	controller.rowSelectAction(t);
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void businessMethod() {
-        System.out.println(xxparser.getSsessionControl() == null);
+	System.out.println(xxparser.getSsessionControl() == null);
     }
 }
