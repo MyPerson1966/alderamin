@@ -123,12 +123,13 @@
 			    <ezcomp:rightsDeterminSet fromFOREACH="1" toFOREACH="8"
 						      modify="0" pos="1" usertype="#{u.userType}" />
 			    </p:panel>
-			    <p:panel>
-			
+                            <p:panel header="User's Telescopes">
+                                <p:dataList value="#{u.userTelescopeList}" var="tps">
+                                    <h:outputText value="#{tps.identifier} #{tps.shortName} #{tps.location}   " />
+                                </p:dataList>
 			    </p:panel>
 			</f:facet>
                         <f:facet name="input">
-			    <!--<p:inputText id="utedit" value="#{u.userType.id}" styleClass="editField" />-->
 			    <p:panel header="Edit User's Rights">
 			    <h:selectOneMenu value="#{u.userType.id}" style="width:80%" required="true">
 				<f:selectItem itemLabel="Select User's Rights" itemValue="" noSelectionOption="true" />
@@ -140,8 +141,9 @@
 			    <p:panel header="Edit User's Telescopes">
                                 
                                 <p:selectManyMenu id="advanced" style=" width:  100%" value="#{u.userTelescopeList}"
+                                                  converter="telescopeConverter"
                                         var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                                        <f:selectItems value="#{telescopeControl.controller.telescopeList}" var="uts" itemLabel="#{uts.name}" itemValue="#{uts}" />
+                                    <f:selectItems value="#{telescopeControl.controller.telescopeList}" var="uts" itemLabel="#{uts}" itemValue="#{uts}" />
                                         <p:column  style=" width:  80%">
                                             <h:outputLabel style=" color: #008888"  value="#{t.name}" />
                                         </p:column>
