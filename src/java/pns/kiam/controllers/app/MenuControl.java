@@ -38,32 +38,6 @@ public class MenuControl {
 //	if (userLoginCTRL.sessionUpToEnd()) {
 //	    return userLoginCTRL.deLogin();
 //	}
-	return gotoURL;
-//	try {
-////	    System.out.println("   " + System.lineSeparator() + System.lineSeparator()
-////		    + "   ssessionCTRL.isActive()  " + ssessionCTRL.isActive() + "   '" + System.lineSeparator()
-////		    //  + "    ssessionCTRL.getSession() == null " + (ssessionCTRL.getSession() == null) + "" + System.lineSeparator()
-////		    + "    ssessionCTRL.isNeedToDelogin() " + ssessionCTRL.isNeedToDelogin()
-////	    );
-//
-////	    System.out.println("");
-////	    System.out.println("");
-////	    System.out.println("");
-////	    System.out.println("  ssessionCTRL.isActive()   " + ssessionCTRL.isActive());
-////	    System.out.println("  ssessionCTRL.isNeedToDelogin()  " + ssessionCTRL.isNeedToDelogin());
-////	    System.out.println("");
-////	    System.out.println("");
-////	    System.out.println("");
-//	    if (ssessionCTRL.isActive() && ssessionCTRL.isNeedToDelogin()) {
-//		gotoURL = "/index";
-//		ssessionCTRL.sessionDestroy();
-//	    }
-//
-//	    System.out.println("   gotoURL " + gotoURL);
-////	return "/index";
-//	    return gotoURL;
-//	} catch (IllegalStateException e) {
-//	}
-//	return "/index";
+        return gotoURL;
     }
 }

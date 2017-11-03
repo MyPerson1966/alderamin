@@ -26,12 +26,7 @@
                 <p:ajax event="click" listener="#{userAdminControl.rowDeSelect()}"
                     update=":UserTableForm  :msgForm:msgsInfo"
                 />
-            </p:commandLink> ||
-            <p:commandLink value="Fix New UserData data" >
-                <p:ajax event="click" listener="#{userAdminControl.controller.fixAllAdded()}"
-                    update=":UserTableForm  :msgForm:msgsInfo"
-                />
-            </p:commandLink>
+            </p:commandLink> 
             
             <p:dataTable id="UserTable" widgetVar="UserTable" value="#{userAdminControl.controller.userList}" var="u" 
 			 resizableColumns="true"
@@ -61,8 +56,7 @@
                     <p:cellEditor>
                         <f:facet name="output"> 
 			    <p:tooltip  for="loginOut" value="#{u.login} "  trackMouse="true"  />
-			    <h:outputText id="loginOut" value="#{u.login}" 
-							     />
+			    <h:outputText id="loginOut" value="#{u.login}"   />
 			</f:facet>
                         <f:facet name="input"><p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /></f:facet>
                     </p:cellEditor>
