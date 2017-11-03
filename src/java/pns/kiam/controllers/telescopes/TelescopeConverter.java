@@ -35,6 +35,7 @@ public class TelescopeConverter implements Converter, Serializable {
     private TelescopeController controller;
     @Inject
     private TelescopeControl telescopeControl;
+    private Telescope ts = null;
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent component, String value) throws ConverterException {
@@ -42,22 +43,11 @@ public class TelescopeConverter implements Converter, Serializable {
         if (value != null && value.trim().length() > 0) {
             value = value.trim();
             try {
-//                tID = Long.parseLong(value.trim());
-//                System.out.println("                     tID   " + tID);
-
-                Telescope ts = null;
-                System.out.println("  VALUE  " + value);
                 String[] parts = value.split("\\{");
                 value = parts[1].split("\\}")[0];
-                //System.out.println("  New VALUE  " + value);
-                ts = parseTelescopeString(value);
 
-//                Telescope ts = (Telescope) em.find(Telescope.class, tID);
-//                System.out.println("    ts " + ts);
-//                Telescope ts = controller.searchTelescope(tID);
-                //System.out.println("   ts: " + ts);
+                ts = parseTelescopeString(value);
                 return ts;
-                //} catch (NumberFormatException e) {
             } catch (NullPointerException ee) {
                 System.out.println("          v " + value);
             }
@@ -71,7 +61,7 @@ public class TelescopeConverter implements Converter, Serializable {
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object object) {
 //        if (object != null) {
-//            return String.valueOf(((Theme) object).getId());
+//            return ts.toString();
 //        } else {
 //            return null;
 //        }
