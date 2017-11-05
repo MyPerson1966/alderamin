@@ -151,6 +151,14 @@
 		<p:column headerText="INSERTED MOMENT" width="100" styleClass="tablefield"
 			  filterBy="#{u.moment}" sortBy="#{ u.moment}">
 		    <f:facet name="filter">
+			
+			
+			
+			
+			
+			
+			
+			
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
 		    </f:facet>  
 		    <p:tooltip  for="momentOut" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(  u.moment)} "  trackMouse="true"  />
@@ -163,9 +171,24 @@
 			
                 </p:column>
 		
+		<p:column style=" width: 25px;  #{userAdminControl.controller.user.id eq u.id  ? 'background: #ccffcc' : null }">
+		    <p:commandLink  value="&#9875;"    >
+                        <p:ajax event="click" listener="#{userAdminControl.rowSelectAction(u)}"  
+				update="@form UserTable :msgForm:msgsInfo" />
+                    </p:commandLink>
+		</p:column> 
 		
 	    </p:dataTable>
 	</h:form>
+	
+	
+	<ezcomp:popUpRemoveMenu
+            removeMethodSelected="#{userAdminControl.controller.removeRow(false)}"
+                removeMethodAll="#{userAdminControl.controller.removeRow(true)}"
+		delAllCaption="Delete All Users "
+		delSelectedCaption="Delete Selected User "
+		targetFor=":UserTableForm" targetUpdate=":UserTableForm:UserTable :UserTableForm    :msgForm:msgsInfo"
+		/>
     </h:body>
 </html>
 

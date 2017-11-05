@@ -1,3 +1,22 @@
+.dldWIDJET{
+    text-align: center;
+    width: 80px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #00b4b4;
+}
+.removeBTN{
+    background:  #ee0000 !important;
+    color: #880000 !important;
+    padding-left: 20px !important;
+    border-color: #aa0000 !important;
+    box-shadow: 10px 10px 10px rgba(250,5,5,0.7)  !important;
+}
+
+.removeBTN:hover{
+    background:  #ff0000 !important;
+    box-shadow: 10px 30px 35px rgba(250,5,5,0.7)  !important;
+}
 .tablefield{
     font-size: 10px;
     padding-left: 20px;
