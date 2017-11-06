@@ -23,20 +23,22 @@
 		    icon="ui-icon-close" 
 		    actionListener="#{cc.attrs.removeMethodSelected}"  />
 	    <p:menuitem value="#{cc.attrs.delAllCaption}" update="#{cc.attrs.targetUpdate}"
-			icon="ui-icon-close"  onclick="PF('dlg2').show();" />
+			icon="ui-icon-close"  onclick="PF('dlgRemoveAll').show();" />
     </p:contextMenu>
 	</h:form>
 	
 	
-	<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" width="280" styleClass="dldWIDJET">
+	<p:dialog header="Modal Dialog" widgetVar="dlgRemoveAll" modal="true" width="280" styleClass="dldWIDJET">
 	    <p:outputLabel  styleClass="dldWIDJET" value="You are begining to remove all records from this table.  Are you shure to continue?" />
 	    
 	    <p:panelGrid columns="2" style="width: 100%">
 		<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
-		    <p:ajax event="click" oncomplete="PF('dlg2').hide();" />
+		    <p:ajax event="click" oncomplete="PF('dlgRemoveAll').hide();" />
 		</p:commandButton>
     
-		<p:commandButton value="Yes" type="button" styleClass="removeBTN" icon="ui-icon-check"  />
+		<p:commandButton value="Yes" type="button" styleClass="removeBTN" icon="ui-icon-check"   >
+		    <p:ajax event="click" listener="#{cc.attrs.removeMethodAll  }"  oncomplete="PF('dlgRemoveAll').hide();" />
+		</p:commandButton>
         
 	    </p:panelGrid>
     <h:outputText value="This is a Modal Dialog       cc.attrs.removeMethodAll   cc.attrs.removeMethodAll   " />

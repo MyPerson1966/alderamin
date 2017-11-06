@@ -82,7 +82,7 @@
 				   value=" #{telescopeMaskControl.controller.selectedInfo}" style="background: antiquewhite; color: #ee0000; font-weight: bold " />
                 </f:facet>
 	    </p:dataTable>
-		<!--
+		
     <p:contextMenu for=":TelescopeMaskTableForm"  style="width: 550px; font-size: 10px">
         <p:menuitem 
 	    value="Delete Selected Mask #{telescopeMaskControl.controller.horizontMask.toString()} of Telescope #{telescopeMaskControl.controller.telescope.identifier} " 
@@ -92,13 +92,13 @@
 	    update=":TelescopeMaskTableForm   :msgForm:msgsInfo" 
 	    icon="ui-icon-close" actionListener="#{telescopeMaskController.removeRow(true)}" />
     </p:contextMenu>
-	-->
+	
 	
 	
 	    
 	</h:form>
 	
-	
+	<!--
 	<ezcomp:popUpRemoveMenu
             removeMethodSelected="#{telescopeMaskController.removeRow(false)}"
                 removeMethodAll="#{telescopeMaskController.removeRow(true)}"
@@ -107,7 +107,7 @@
 		targetFor=":TelescopeMaskTableForm" targetUpdate=":TelescopeMaskTableForm:TelescopeMaskTable     :msgForm:msgsInfo"
 		/>
 	<ui:include src="/telescopes/LoadTelescopeList.xhtml" />
-	
+	-->
     </h:body>
 </html>
 
