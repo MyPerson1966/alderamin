@@ -20,15 +20,19 @@
 	<h:form>
 	<p:contextMenu  for="#{cc.attrs.targetFor}" style="width: 550px; font-size: 10px;">
 	    <p:menuitem value="#{cc.attrs.delSelectedCaption}  " update="#{cc.attrs.targetUpdate}"
-		    icon="ui-icon-close" 
-		    actionListener="#{cc.attrs.removeMethodSelected}"  />
+			onclick="if(!confirm('Removing a record.  \r\n Continue?'))return false ; "
+			icon="ui-icon-close" action="#{cc.attrs.removeMethodSelected}"
+		      />
 	    <p:menuitem value="#{cc.attrs.delAllCaption}" update="#{cc.attrs.targetUpdate}"
-			icon="ui-icon-close"  onclick="PF('dlgRemoveAll').show();" />
+			onclick="if(!confirm('Removing all record.  \r\n Continue?'))return false ; "
+			icon="ui-icon-close" action="#{cc.attrs.removeMethodAll}"/>
     </p:contextMenu>
 	</h:form>
-	
-	
-	<p:dialog header="Modal Dialog" widgetVar="dlgRemoveAll" modal="true" width="280" styleClass="dldWIDJET">
+	<!--
+	<h:form id="dlgRemove">
+	    
+	<p:dialog header="Remove All Records" widgetVar="dlgRemoveAll" modal="true" width="280" styleClass="dldWIDJET">
+	     onclick="PF('dlgRemoveAll').show();"   onclick="PF('dlgRemoveOne').show();"
 	    <p:outputLabel  styleClass="dldWIDJET" value="You are begining to remove all records from this table.  Are you shure to continue?" />
 	    
 	    <p:panelGrid columns="2" style="width: 100%">
@@ -41,7 +45,27 @@
 		</p:commandButton>
         
 	    </p:panelGrid>
-    <h:outputText value="This is a Modal Dialog       cc.attrs.removeMethodAll   cc.attrs.removeMethodAll   " />
-</p:dialog>   
+	    
+	</p:dialog>
+	
+	<p:dialog header="Remove selected record" widgetVar="dlgRemoveOne" modal="true" width="280" styleClass="oneWIDJET">
+	    <p:outputLabel  styleClass="dldWIDJET" value="You are begining to remove all records from this table.  Are you shure to continue?" />
+	    
+	    <p:panelGrid columns="2" style="width: 100%">
+		<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" >
+		    <p:ajax event="click" oncomplete="PF('dlgRemoveAll').hide();" />
+		</p:commandButton>
+    
+		<p:commandButton value="Yes" type="button" styleClass="removeBTN" icon="ui-icon-check" 
+				 actionListener="#{cc.attrs.removeMethodSelected }">
+		    <p:ajax event="click"    oncomplete="PF('dlgRemoveOne').hide();" />
+		</p:commandButton>
+        
+	    </p:panelGrid>
+	    
+	</p:dialog>
+	</h:form>
+	-->
+	
     </cc:implementation>
 </html>
