@@ -5,7 +5,8 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -206,7 +207,9 @@
 		delSelectedCaption="Delete Selected Telescope "
 		targetFor=":TelescopeTableForm" targetUpdate=":TelescopeTableForm:TelescopeTable :TelescopeMaskTableForm    :msgForm:msgsInfo"
 		/>
-	    
+	
+	
+	<ui:include src="/telescopes/LoadTelescopeList.xhtml" />
     </h:body>
 </html>
 

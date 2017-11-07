@@ -1,5 +1,24 @@
+.ui-dialog{
+}
+.ui-dialog--content Dialog{
+    background: #fffff0 !important; 
+    padding: 10px!important; 
+    color: #009494!important; 
+    
+}
+.ui-dialog-titlebar{
+    background: #ccfefe !important; 
+}
+.ui-dialog-title-dialog{
+    padding: 15px!important; 
+    color: #00a4a4!important; 
+}
 
 
+.ui-fileupload {
+    border-color: #004343 !important;
+    color: #004343 !important;
+}
 .ui-widget{
     background: #fffffe  !important; 
 }
@@ -15,15 +34,26 @@
     background: #f3f2f3 !important;
     color: #009393 !important; 
 }
-.ui-button:hover ,  .ui-commandlink:hover {
+.ui-button:hover {
     box-shadow: 0 5px 5px rgba(0,110,110,0.9)  !important;
     color: #004343 !important;
+    background-image: -webkit-gradient(
+	    linear, left top, left bottom, from(rgba(100,200,200,0.7)),
+	    to(rgba(100,100,100,0.2))
+	) !important;
 }
-
+.ui-commandlink:hover {
+    box-shadow: 5px 5px 5px rgba(0,110,110,0.5)  !important;
+    color: #004343 !important;
+    background-image: -webkit-gradient(
+	    linear, left top, left bottom, from(rgba(100,200,200,0.7)),
+	    to(rgba(100,100,100,0.5))
+	) !important;
+}
 .ui-paginator-page, .ui-paginator-first, .ui-paginator-prev, .ui-paginator-next, .ui-paginator-last{
     padding-left: 15px   !important;
     padding-right:15px   !important;
-    background: #e5e5e5 !important;
+    background: #cce5e5 !important;
     color: #009393 !important;
     border: none;
 }
@@ -42,14 +72,16 @@
     box-shadow: 0 10px 10px rgba(0,110,110,0.8)  !important;
 }
 
-.ui-menubar  {
-    background: #fffff0 !important;
+.ui-menubar ,.ui-menuitem {
+    background-image: -webkit-gradient(
+	    linear, left top, left bottom, from(rgba(100,200,200,0.4)),
+	    to(rgba(100,100,100,0.2))
+	) !important;
+    
     color: #ffffff !important;
     font-weight: bolder !important;
 }
-.ui-menuitem{
-    margin-right: 5px !important;
-}
+
 .ui-paginator .ui-paginator-top {
     background: #fffff0  !important; 
 }
