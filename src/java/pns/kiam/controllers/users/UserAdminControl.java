@@ -43,6 +43,18 @@ public class UserAdminControl implements Serializable {
 	this.controller = controller;
     }
 
+    public void generateRNDPW() {
+	String pass = pns.utils.strings.RStrings.rndLetterStringRNDLen(9, 14, 10, true, false);
+	String logg = pns.utils.strings.RStrings.rndLetterStringRNDLen(9, 14, 10, true, false);
+	if (controller.getUser() != null) {
+	    controller.getUser().setLogin(logg);
+	    controller.getUser().setPassword(pass);
+	}
+    }
+
+    /**
+     * Prepare to create user
+     */
     public void prepareCreation() {
 	controller.prepareCreation();
     }

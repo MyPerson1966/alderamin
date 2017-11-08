@@ -20,10 +20,12 @@
 	<h:form>
 	<p:contextMenu  for="#{cc.attrs.targetFor}" style="width: 550px; font-size: 10px;">
 	    <p:menuitem value="#{cc.attrs.delSelectedCaption}  " update="#{cc.attrs.targetUpdate}"
+			async="true"
 			onclick="if(!confirm('Removing a record.  \r\n Continue?'))return false ; "
 			icon="ui-icon-close" action="#{cc.attrs.removeMethodSelected}"
 		      />
-	    <p:menuitem value="#{cc.attrs.delAllCaption}" update="#{cc.attrs.targetUpdate}"
+	    <p:menuitem value="#{cc.attrs.delAllCaption}" update="#{cc.attrs.targetUpdate}" 
+			async="true"
 			onclick="if(!confirm('Removing all record.  \r\n Continue?'))return false ; "
 			icon="ui-icon-close" action="#{cc.attrs.removeMethodAll}"/>
     </p:contextMenu>

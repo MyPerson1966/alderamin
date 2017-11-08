@@ -15,35 +15,39 @@
             
             <p:commandLink value="TEST "  styleClass="commandbutton">
                 <p:ajax event="click" listener="#{telescopeControl.businessMethod()}"
+			async="true"
 			
                 />
             </p:commandLink> || 
             <p:commandLink value="Create Telescope"  styleClass="commandbutton">
                 <p:ajax event="click" listener="#{telescopeControl.prepareCreation()}"
+			async="true"
 			update=":TelescopeTableForm :msgForm:msgsInfo" 
 			oncomplete="PF('TelescopeTable').paginator.setPage(PF('TelescopeTable').paginator.cfg.pageCount - 1);"
                 />
             </p:commandLink> ||  
             <p:commandLink id="deselectTelescope" value="Deselect Telescope" disabled="#{telescopeControl.controller.telescope==null }" >
                 <p:ajax event="click" listener="#{telescopeControl.rowDeSelect()}"
+			async="true"
                     update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo"
                 />
             </p:commandLink> ||  
 	    <p:commandLink value="Upload Telescope List" type="button" onclick="PF('telescopeUPL').show();" /> ||
             <p:commandLink value="Fix Uploaded Telescope data" disabled="#{!telescopeControl.controller.freshUploadComplete}" >
                 <p:ajax event="click" listener="#{telescopeControl.controller.fixAllAdded()}"
+			async="true"
                     update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo"
                 />
             </p:commandLink>
             
             <p:dataTable id="TelescopeTable" widgetVar="TelescopeTable" value="#{telescopeControl.controller.telescopeList}" var="t" 
-			 resizableColumns="true"
+			 resizableColumns="true" lazy="true"
 			 rows="10" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,10,15,20, 25,30"
 			 editable="true">
                 
-                <p:ajax event="rowEdit" listener="#{telescopeControl.controller.onRowEdit}" update=":msgForm:msgsInfo" />
-                <p:ajax event="rowEditCancel" listener="#{telescopeControl.controller.onRowCancel}" update=":msgForm:msgsInfo" />
-                <p:ajax event="rowSelect" listener="#{telescopeControl.controller.rowSelect()}"  update=":msgForm:msgsInfo" />  
+                <p:ajax event="rowEdit" listener="#{telescopeControl.controller.onRowEdit}" update=":msgForm:msgsInfo" async="true"/>
+                <p:ajax event="rowEditCancel" listener="#{telescopeControl.controller.onRowCancel}" update=":msgForm:msgsInfo" async="true"/>
+                <p:ajax event="rowSelect" listener="#{telescopeControl.controller.rowSelect()}"  update=":msgForm:msgsInfo" async="true"/>  
 		
                 <f:facet name="header">
                    <p:outputPanel> TELESCOPES
@@ -182,6 +186,7 @@
                     
                     <p:commandLink  value="&#9875;"    >
                         <p:ajax event="click" listener="#{telescopeControl.rowSelectAction(t)}"  
+			async="true"
 				update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo" />
                     </p:commandLink>
                     

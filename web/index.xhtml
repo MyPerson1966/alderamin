@@ -11,9 +11,10 @@
         <ui:composition template="./bTemplate.xhtml">
 
 
-            <ui:define name="content">
+
+            <ui:define id="cont" name="content">
                 <c:if test="#{userLoginControl.loginned}" >  
-                    <ui:include src="/telescopes/ListTelescope.xhtml" />
+                   <ui:include src="/telescopes/ListTelescope.xhtml" />
                 </c:if>
                 <c:if test="#{!userLoginControl.loginned}" >  
                     <ui:include src="/users/LoginForm.xhtml" />
@@ -22,7 +23,7 @@
 
             <ui:define name="right">
                 <c:if test="#{userLoginControl.loginned}" >  
-                    <ui:include src="/telescopes/ListMask.xhtml" />
+                    <ui:include src="/telescopes/ListMask.xhtml" /> 
                 </c:if>
             </ui:define>
             

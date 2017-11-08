@@ -28,13 +28,12 @@
             </p:commandLink> 
             
             <p:dataTable id="UserTable" widgetVar="UserTable" value="#{userAdminControl.controller.userList}" var="u" 
-			 resizableColumns="true"
-			  
+			 resizableColumns="true" lazy="true"
 			 rows="8" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,8,10,15,20,25,30,50"
 			 editable="true">
 		
-                <p:ajax event="rowEdit"  async="false"  listener="#{userAdminControl.controller.onRowEdit}" update=":msgForm:msgsInfo   " />
-                <p:ajax event="rowEditCancel" async="false" listener="#{userAdminControl.controller.onRowCancel}" update=":msgForm:msgsInfo   " />
+                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" update="@form:UserTable" />
+                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update=":msgForm:msgsInfo @form   " />
 		<f:facet name="header">
                
 		    <p:outputPanel> USERS &nbsp; &nbsp; &nbsp;
@@ -57,7 +56,13 @@
 			    <p:tooltip  for="loginOut" value="#{u.login} "  trackMouse="true"  />
 			    <h:outputText id="loginOut" value="#{u.login}"   />
 			</f:facet>
-                        <f:facet name="input"><p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /></f:facet>
+                        <f:facet name="input">
+			    
+			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /><br />
+			<h:commandButton value="Another password">
+			    <p:ajax event="click" listener="#{userAdminControl.generateRNDPW()}" update="loginedit  passwedit" />
+			    </h:commandButton>
+			</f:facet>
                     </p:cellEditor>
                 </p:column>
 		

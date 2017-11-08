@@ -8,17 +8,27 @@
     </h:head>
     <h:body>
         
-	<h:form id="msgForm">
-            <p:growl id="msgsInfo" showDetail="true" life="900"  for="@all" />
-	</h:form>
 	<h:form>
 	    
 	    <p:menubar >
-	    <p:menuitem value="Home" outcome="#{menuControl.navigste('/index') }"  icon="ui-icon-home"></p:menuitem>
-	    <p:menuitem value="Telescopes" outcome="#{menuControl.navigste('/telescopes/telescopedata') }"  icon="ui-icon-document"></p:menuitem>
-	    <p:menuitem value="Users Docs"  outcome="#{menuControl.navigste('/users/userdata' )}" ></p:menuitem>
+	    <p:menuitem value="Home" outcome="#{menuControl.navigste('/index') }" 
+			async="true" icon="ui-icon-home"></p:menuitem>
+	    <p:menuitem value="Telescopes" outcome="#{menuControl.navigste('/telescopes/telescopedata') }"
+			
+			async="true"
+			icon="ui-icon-document"></p:menuitem>
+	    <p:menuitem value="Users Docs"  outcome="#{menuControl.navigste('/users/userdata' )}"
+			async="true"
+			 ></p:menuitem>
             <p:menuitem value="Quit"  icon="ui-icon-close" action="#{userLoginControl.deLogin()}" update="@all" />
 	</p:menubar>
+	</h:form>
+	
+	
+	
+	
+	<h:form id="msgForm">
+            <p:growl id="msgsInfo" showDetail="true" life="900"  for="@all" />
 	</h:form>
     </h:body>
 </html>

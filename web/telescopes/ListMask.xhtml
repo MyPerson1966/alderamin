@@ -30,7 +30,7 @@
 	    
 
             
-	    <p:dataTable id="TelescopeMaskTable" widgetVar="TelescopeMaskTable"
+	    <p:dataTable id="TelescopeMaskTable" widgetVar="TelescopeMaskTable" lazy="true"
 			 style=" #{telescopeMaskControl.controller.telescope.telescopeMask.size()>0 eq tm ? 'display: block' : ' none' }"
 			 value="#{telescopeMaskControl.controller.telescope.telescopeMask}" var="tm"
                          rows="12" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" 
@@ -38,6 +38,7 @@
 			 >
 		
 		<p:ajax event="rowEdit" listener="#{telescopeMaskControl.controller.onRowEdit}"
+			async="true"
 			update=":TelescopeMaskTableForm  :msgForm:msgsInfo" />
 		
 		
@@ -73,7 +74,8 @@
                 
 		<p:column style=" width: 25px;  #{telescopeMaskControl.controller.horizontMask eq tm ? 'background: #ccffcc' : null }">
 		    <p:commandLink  value="&#9875;"    >
-                        <p:ajax event="click" listener="#{telescopeMaskController.rowSelectAction(tm)}"  
+                        <p:ajax event="click" listener="#{telescopeMaskController.rowSelectAction(tm)}" 
+			async="true" 
 				update="@form TelescopeMaskTable :msgForm:msgsInfo" />
                     </p:commandLink>
 		</p:column> 
@@ -82,31 +84,19 @@
 				   value=" #{telescopeMaskControl.controller.selectedInfo}" style="background: antiquewhite; color: #ee0000; font-weight: bold " />
                 </f:facet>
 	    </p:dataTable>
-		
-    <p:contextMenu for=":TelescopeMaskTableForm"  style="width: 550px; font-size: 10px">
-        <p:menuitem 
-	    value="Delete Selected Mask #{telescopeMaskControl.controller.horizontMask.toString()} of Telescope #{telescopeMaskControl.controller.telescope.identifier} " 
-	    update=":TelescopeMaskTableForm   :msgForm:msgsInfo" icon="ui-icon-close" 
-	    actionListener="#{telescopeMaskController.removeRow(false)}" />
-        <p:menuitem value="Delete All Masks of Telescope #{telescopeMaskController.telescope.identifier}" 
-	    update=":TelescopeMaskTableForm   :msgForm:msgsInfo" 
-	    icon="ui-icon-close" actionListener="#{telescopeMaskController.removeRow(true)}" />
-    </p:contextMenu>
-	
-	
-	
+
 	    
 	</h:form>
 	
-	<!--
-	<ezcomp:popUpRemoveMenu
-            removeMethodSelected="#{telescopeMaskController.removeRow(false)}"
-                removeMethodAll="#{telescopeMaskController.removeRow(true)}"
-		delAllCaption="Delete All Telescope Masks  "
-		delSelectedCaption="Delete Selected Telescope Mask "
-		targetFor=":TelescopeMaskTableForm" targetUpdate=":TelescopeMaskTableForm:TelescopeMaskTable     :msgForm:msgsInfo"
-		/>
-	-->
+	 
+      <ezcomp:popUpRemoveMenu
+	    removeMethodSelected="#{telescopeMaskControl.controller.removeRow(false)}"
+	    removeMethodAll="#{telescopeMaskControl.controller.removeRow(true)}"
+	    delAllCaption="Delete All Telescope Masks   "
+	    delSelectedCaption="Delete Selected Telescope Mask "
+	    targetFor=":TelescopeMaskTableForm" targetUpdate=":TelescopeMaskTableForm:TelescopeMaskTable     :msgForm:msgsInfo"
+      />
+     
     </h:body>
 </html>
 

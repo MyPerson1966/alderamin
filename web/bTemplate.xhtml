@@ -16,15 +16,16 @@
         <title>Facelets Template</title>
     </h:head>
 
-    <h:body style=" background: #AFAFAF">
+    <h:body>
 
 	 
            
-	<table width="100%" >
+	<table  align="center" id="spt"
+	       >
             <c:if test="#{userLoginControl.loginned}" >
 	    <tr valign="top">
 		<td colspan="2">
-		    <ui:include src="/menu/headMenu.xhtml"/>
+		     <ui:include src="/menu/headMenu.xhtml"/> 
 		</td>
 	    </tr>
             </c:if>

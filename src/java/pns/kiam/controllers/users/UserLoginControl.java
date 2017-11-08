@@ -42,7 +42,7 @@ public class UserLoginControl implements Serializable {
      * @return the value of password
      */
     public String getPassword() {
-        return password;
+	return password;
     }
 
     /**
@@ -51,7 +51,7 @@ public class UserLoginControl implements Serializable {
      * @param password new value of password
      */
     public void setPassword(String password) {
-        this.password = password;
+	this.password = password;
     }
 
     /**
@@ -60,7 +60,7 @@ public class UserLoginControl implements Serializable {
      * @return the value of login
      */
     public String getLogin() {
-        return login;
+	return login;
     }
 
     /**
@@ -69,7 +69,7 @@ public class UserLoginControl implements Serializable {
      * @param login new value of login
      */
     public void setLogin(String login) {
-        this.login = login;
+	this.login = login;
     }
 
     /**
@@ -78,15 +78,15 @@ public class UserLoginControl implements Serializable {
      * @return the value of loginned
      */
     public boolean isLoginned() {
-        ssessionCTRL.init();
-        if (ssessionCTRL.getSession().getAttribute("loginned") != null) {
-            return (Boolean) ssessionCTRL.getSession().getAttribute("loginned");
-        }
-        return loginned;
+	ssessionCTRL.init();
+	if (ssessionCTRL.getSession().getAttribute("loginned") != null) {
+	    return (Boolean) ssessionCTRL.getSession().getAttribute("loginned");
+	}
+	return loginned;
     }
 
     public boolean isIsSuperUser() {
-        return isSuperUser;
+	return isSuperUser;
     }
 
     /**
@@ -95,32 +95,31 @@ public class UserLoginControl implements Serializable {
      * @param loginned new value of loginned
      */
     public void setLoginned(boolean loginned) {
-        this.loginned = loginned;
+	this.loginned = loginned;
     }
 
     private boolean userExists() {
-        for (int k = 0; k < controller.getUserList().size(); k++) {
-            User tmp = controller.getUserList().get(k);
-            System.out.println("           User tmp    " + tmp);
-            if (tmp.getLogin().equals(login) && tmp.getPassword().equals(password)) {
-                return true;
-            }
-        }
-        return false;
+	for (int k = 0; k < controller.getUserList().size(); k++) {
+	    User tmp = controller.getUserList().get(k);
+	    System.out.println("           User tmp    " + tmp);
+	    if (tmp.getLogin().equals(login) && tmp.getPassword().equals(password)) {
+		return true;
+	    }
+	}
+	return false;
     }
 
     /**
      * try to login app
      */
-    public void testLogin() {
-        boolean bb = userExists();
+    public String testLogin() {
+	boolean bb = userExists();
 //	ssessionCTRL.init();
-        if ((login.equals(configControl.getConfigADMLogin()) && password.equals(configControl.getConfigAdmPassword())) || bb) {
-            ssessionCTRL.getSession().setAttribute("loginned", true);
-            ssessionCTRL.getSession().setAttribute("login", login);
-            ssessionCTRL.getSession().setAttribute("isSuperAdmin", true);
-            //loginned = true;
-            ssessionCTRL.setTimeout(Integer.MAX_VALUE);
+	if ((login.equals(configControl.getConfigADMLogin()) && password.equals(configControl.getConfigAdmPassword())) || bb) {
+	    ssessionCTRL.getSession().setAttribute("loginned", true);
+	    ssessionCTRL.getSession().setAttribute("login", login);
+	    ssessionCTRL.getSession().setAttribute("isSuperAdmin", true);
+	    ssessionCTRL.setTimeout(Integer.MAX_VALUE);
 //	    ssessionCTRL.setTimeout(70);
 //	    System.out.println(" ssessionCTRL.getSession() == null  =  "
 //		    + (ssessionCTRL.getSession() == null) + "  " + ""
@@ -130,46 +129,46 @@ public class UserLoginControl implements Serializable {
 //		    + ssessionCTRL.getSession().getMaxInactiveInterval() + "   "
 //		    + ssessionCTRL.isActive()
 //	    );
-        }
-
+	}
+	return "/index.xhtml?faces-redirect=true";
     }
 
     /**
      * fixes that the session end and then logged Out
      */
     public boolean sessionUpToEnd() {
-        long curr = System.currentTimeMillis();
-        try {
-            if (ssessionCTRL.isActive() && ssessionCTRL.getSession() != null) {
-                long last = ssessionCTRL.getSession().getLastAccessedTime();
-                int duration = ssessionCTRL.getSession().getMaxInactiveInterval() * 1000;
-                long finMoment = last + duration;
-                long rest = (finMoment - curr) / 1000;
-                if (rest < 50) {
-                    System.out.println("==========================<<<<<50");
+	long curr = System.currentTimeMillis();
+	try {
+	    if (ssessionCTRL.isActive() && ssessionCTRL.getSession() != null) {
+		long last = ssessionCTRL.getSession().getLastAccessedTime();
+		int duration = ssessionCTRL.getSession().getMaxInactiveInterval() * 1000;
+		long finMoment = last + duration;
+		long rest = (finMoment - curr) / 1000;
+		if (rest < 50) {
+		    System.out.println("==========================<<<<<50");
 
-                }
-                if (rest < 20) {
-                    System.out.println(" doLogout ==========================<<<<<100");
-                    return true;
-                }
+		}
+		if (rest < 20) {
+		    System.out.println(" doLogout ==========================<<<<<100");
+		    return true;
+		}
 //		System.out.println("--->>" + new Date() + " last  " + new Date(last)
 //			+ "     duration: " + duration + System.lineSeparator()
 //			+ "     curr " + curr
 //			+ "     finMoment: " + finMoment + "  rest: " + rest);
-            }
-        } catch (IllegalStateException e) {
-        }
-        return false;
+	    }
+	} catch (IllegalStateException e) {
+	}
+	return false;
     }
 
     public String deLogin() {
-        login = password = "";
-        ssessionCTRL.getSession().setAttribute("loginned", null);
-        ssessionCTRL.getSession().setAttribute("login", null);
-        ssessionCTRL.getSession().setAttribute("isSuperAdmin", null);
+	login = password = "";
+	ssessionCTRL.getSession().setAttribute("loginned", null);
+	ssessionCTRL.getSession().setAttribute("login", null);
+	ssessionCTRL.getSession().setAttribute("isSuperAdmin", null);
 
-        ssessionCTRL.sessionDestroy();
-        return "/index.xhtml?faces-redirect=true";
+	ssessionCTRL.sessionDestroy();
+	return "/index.xhtml?faces-redirect=true";
     }
 }
