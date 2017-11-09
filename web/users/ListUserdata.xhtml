@@ -60,7 +60,7 @@
 			    
 			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /><br />
 			<h:commandButton value="Another password">
-			    <p:ajax event="click" listener="#{userAdminControl.generateRNDPW()}" update="loginedit  passwedit" />
+			    <p:ajax event="click" listener="#{userAdminControl.generateRNDPW()}" update="loginedit passwedit" />
 			    </h:commandButton>
 			</f:facet>
                     </p:cellEditor>
