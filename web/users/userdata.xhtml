@@ -9,14 +9,16 @@
         <ui:composition template="/bTemplate.xhtml">
 
 
-            <c:if test="#{userLoginControl.loginned &amp;&amp; userLoginControl.currUser.userType.rights>=240}" >
-            <ui:define name="content">
-		<ui:include src="/users/ListUserdata.xhtml" />
+           <ui:define name="content">
+		 <c:if test="#{userLoginControl.loginned &amp;&amp; userLoginControl.currUser.userType.rights>=240}" >
+                    <ui:include src="/users/ListUserdata.xhtml" />
+                </c:if>
             </ui:define>
             <ui:define name="right">
-		<ui:include src="/menu/userVertMenu.xhtml" />
+		<c:if test="#{userLoginControl.loginned &amp;&amp; userLoginControl.currUser.userType.rights>=240}" >
+                    <ui:include src="/menu/userVertMenu.xhtml" />
+                </c:if>
             </ui:define>
-            </c:if>
         </ui:composition>
 
     </body>
