@@ -9,7 +9,8 @@
     </h:head>
     <h:body>
         
-        <p:dialog id="myselfBox" widgetVar="myselfBox" header="My Info" >
+        <p:dialog id="myselfBox" widgetVar="myselfBox" header="My Info" 
+                  maximizable="false" modal="true" closeOnEscape="true" resizable="false" >
             <p:panel header="Personal Info" >
             <h:panelGrid columns="2" cellpadding="10" >
                 
@@ -35,8 +36,7 @@
             </p:panel>
             <p:panel header="My Scope">
                 
-                <p:tooltip  for="myRightsOut" value="#{userLoginControl.currUser.userType.rights}   ( #{userLoginControl.currUser.userType.binRights} )  "  trackMouse="true"  />
-		<p:outputLabel value="Rights: #{userLoginControl.currUser.userType.rights}   ( #{userLoginControl.currUser.userType.binRights} )  "/>
+                <p:outputLabel style="z-index: 10000" value="#{userLoginControl.currUser.userType.name}  Rights: #{userLoginControl.currUser.userType.rights}   ( #{userLoginControl.currUser.userType.binRights} )  "/>
                 	    
                 <ezcomp:rightsDeterminSet id="myRightsOut" fromFOREACH="1" toFOREACH="8"
 						      modify="0" pos="1" usertype="#{userLoginControl.currUser.userType}" />

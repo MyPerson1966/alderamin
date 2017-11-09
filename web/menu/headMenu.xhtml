@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -14,14 +15,18 @@
 	    <p:menubar >
 	    <p:menuitem value="Home" outcome="#{menuControl.navigste('/index') }" 
 			async="true" icon="ui-icon-home"></p:menuitem>
-	    <p:menuitem value="Telescopes" outcome="#{menuControl.navigste('/telescopes/telescopedata') }"
+	    
+                <c:if test="#{userLoginControl.loginned &amp;&amp; userLoginControl.currUser.userType.rights>=240}" >
+                <p:menuitem value="Telescopes" outcome="#{menuControl.navigste('/telescopes/telescopedata') }"
 			
 			async="true"
 			icon="ui-icon-document"></p:menuitem>
 	    <p:menuitem value="Users Docs"  outcome="#{menuControl.navigste('/users/userdata' )}"
 			async="true"
 			 ></p:menuitem>
-	    <p:menuitem value="About Me"  onclick="PF('myselfBox').show();" ></p:menuitem>
+                </c:if>
+                
+                <p:menuitem value="About Me"  onclick="PF('myselfBox').show();" ></p:menuitem>
             <p:menuitem value="Quit"  icon="ui-icon-close" action="#{userLoginControl.deLogin()}" update="@all" />
 	</p:menubar>
 	</h:form>

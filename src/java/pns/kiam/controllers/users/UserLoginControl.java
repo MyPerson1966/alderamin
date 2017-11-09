@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import pns.kiam.controllers.app.ConfigControl;
 import pns.kiam.entities.users.User;
+import pns.kiam.entities.users.UserType;
 import pns.kiam.sweb.controllers.app.SsessionControl;
 import pns.kiam.sweb.controllers.user.UserController;
 
@@ -109,9 +110,11 @@ public class UserLoginControl implements Serializable {
         for (int k = 0; k < controller.getUserList().size(); k++) {
             User tmp = controller.getUserList().get(k);
             if (tmp.getLogin().equals(login) && tmp.getPassword().equals(password)) {
-                currUser = tmp;
-                System.out.println("  ------------------->  currUser  " + currUser);
-                return true;
+                if (tmp.isIsActive()) {
+                    currUser = tmp;
+                    System.out.println("  ------------------->  currUser  " + currUser);
+                    return true;
+                }
             }
         }
         return false;
@@ -124,6 +127,14 @@ public class UserLoginControl implements Serializable {
         boolean bb = userExists();
 //	ssessionCTRL.init();
         if ((login.equals(configControl.getConfigADMLogin()) && password.equals(configControl.getConfigAdmPassword())) || bb) {
+            currUser.setLogin(login);
+            currUser.setPassword(password);
+            if (currUser.getId() == null) {
+                UserType ut = new UserType();
+                ut.setName("ServiceAdmin");
+                ut.setRights(511);
+                currUser.setUserType(ut);
+            }
             ssessionCTRL.getSession().setAttribute("loginned", true);
             ssessionCTRL.getSession().setAttribute("login", login);
             ssessionCTRL.getSession().setAttribute("isSuperAdmin", true);
