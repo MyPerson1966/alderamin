@@ -56,9 +56,25 @@ public class TelescopeControl {
      */
     public Boolean telescopeInUse(Telescope t) {
         if (userController.getTelescopeUserList().contains(t)) {
+            //outTelescopesInUse();
             return true;
         }
         return false;
+    }
+
+    private void outTelescopesInUse() {
+        System.out.println("   TelescopesInUse:");
+        for (int k = 0; k < userController.getTelescopeUserList().size(); k++) {
+            System.out.println(k + ":   " + userController.getTelescopeUserList().get(k));
+        }
+    }
+
+    private void outTelescopesInUse(User u) {
+        System.out.println("   TelescopesInUse of user " + u
+                + " :");
+        for (int k = 0; k < u.getUserTelescopeList().size(); k++) {
+            System.out.println(k + ":   " + u.getUserTelescopeList().get(k));
+        }
     }
 
     /**
@@ -69,7 +85,14 @@ public class TelescopeControl {
      * @return
      */
     public Boolean telescopeInUse(Telescope t, User u) {
+
         boolean res = telescopeInUse(t);
+//        if (res) {
+//            System.out.println("         ++++++++++++++++       ");
+//            outTelescopesInUse(u);
+//        }
+//        System.out.println(" ------->>=> u  " + u + System.lineSeparator()
+//                + "----->-> res  " + res + ":   " + t.getIdentifier());
         if (res && !u.getUserTelescopeList().contains(t)) {
             return true;
         }
