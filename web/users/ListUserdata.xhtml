@@ -33,7 +33,7 @@
 			 editable="true">
 		
                 <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" update="@form:UserTable" />
-                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update=":msgForm:msgsInfo @form   " />
+                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update="@form:UserTable  " />
 		<f:facet name="header">
                
 		    <p:outputPanel> USERS &nbsp; &nbsp; &nbsp;
@@ -58,10 +58,7 @@
 			</f:facet>
                         <f:facet name="input">
 			    
-			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /><br />
-			<h:commandButton value="Another password">
-			    <p:ajax event="click" listener="#{userAdminControl.generateRNDPW()}" update="loginedit passwedit" />
-			    </h:commandButton>
+			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" />
 			</f:facet>
                     </p:cellEditor>
                 </p:column>
