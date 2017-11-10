@@ -58,10 +58,7 @@
 			</f:facet>
                         <f:facet name="input">
 			    
-			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" /><br />
-			<h:commandButton value="Another password">
-			    <p:ajax event="click" listener="#{userAdminControl.generateRNDPW()}" update="loginedit passwedit" />
-			    </h:commandButton>
+			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" />
 			</f:facet>
                     </p:cellEditor>
                 </p:column>

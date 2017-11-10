@@ -56,6 +56,7 @@
                 <p:column style="width: 15px;background: #ffffcc">
                     <p:rowEditor  />
                 </p:column>
+                
                 <p:column headerText="NUMBER"
 			  filterBy="#{t.identifier}" sortBy="#{t.identifier}">
 		    <f:facet name="filter">
@@ -175,7 +176,9 @@
                         <f:facet name="input"><p:inputTextarea value="#{t.comment}" styleClass="editField" /></f:facet>
                     </p:cellEditor>
                 </p:column>
-                 
+                <p:column  headerText="IN USE"   style=" width: 25px; #{telescopeControl.telescopeInUse(t) ? 'background: #ccd2d2' : null }" >
+                    <h:outputLabel value="#{telescopeControl.telescopeInUse(t)}" style="  #{telescopeControl.telescopeInUse(t) ? 'color: #009292' :  '#cc0000' }" />
+                </p:column>
 		<p:column   style=" width: 15px; #{telescopeControl.controller.telescope.identifier eq t.identifier ? 'background: #ccffcc' : null }" >
                     
                     <p:commandLink  value="&#9875;"    >

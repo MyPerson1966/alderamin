@@ -10,8 +10,10 @@ import javax.ejb.Stateful;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import pns.kiam.entities.telescopes.Telescope;
+import pns.kiam.entities.users.User;
 import pns.kiam.sweb.controllers.app.XXParserSWEB;
 import pns.kiam.sweb.controllers.telescope.TelescopeController;
+import pns.kiam.sweb.controllers.user.UserController;
 
 /**
  *
@@ -25,22 +27,56 @@ public class TelescopeControl {
     private TelescopeController controller;
 
     @EJB
+    private UserController userController;
+
+    @EJB
     private XXParserSWEB xxparser;
 
     public TelescopeController getController() {
-	return controller;
+        return controller;
     }
 
     public void setController(TelescopeController controller) {
-	this.controller = controller;
+        this.controller = controller;
     }
 
     public void prepareCreation() {
-	controller.prepareCreation();
+        controller.prepareCreation();
     }
 
     public void rowDeSelect() {
-	controller.rowDeSelect();
+        controller.rowDeSelect();
+    }
+
+    /**
+     * Detecting the given Telescope t as used
+     *
+     * @param Telescope t
+     * @return
+     */
+    public Boolean telescopeInUse(Telescope t) {
+        if (userController.getTelescopeUserList().contains(t)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Detecting the given Telescope t as used Exclude the telescopes of the
+     * given user u;
+     *
+     * @param Telescope t
+     * @return
+     */
+    public Boolean telescopeInUse(Telescope t, User u) {
+        boolean res = telescopeInUse(t);
+        if (res && !u.getUserTelescopeList().contains(t)) {
+            return true;
+        }
+//        if (userController.getTelescopeUserList().contains(t)) {
+//            return true;
+//        }
+        return false;
     }
 
     /**
@@ -49,7 +85,7 @@ public class TelescopeControl {
      * @param event
      */
     public void onRowEdit(RowEditEvent event) {
-	controller.onRowEdit(event);
+        controller.onRowEdit(event);
     }
 
     /**
@@ -60,7 +96,7 @@ public class TelescopeControl {
      * @param all
      */
     public void removeRow(boolean all) {
-	controller.removeRow(all);
+        controller.removeRow(all);
     }
 
     /**
@@ -69,14 +105,14 @@ public class TelescopeControl {
      * @param event
      */
     public void onRowCancel(RowEditEvent event) {
-	controller.onRowCancel(event);
+        controller.onRowCancel(event);
     }
 
     /**
      * Row Select action
      */
     public void rowSelect() {
-	controller.rowSelect();
+        controller.rowSelect();
     }
 
     /**
@@ -85,12 +121,12 @@ public class TelescopeControl {
      * @param t
      */
     public void rowSelectAction(Telescope t) {
-	controller.rowSelectAction(t);
+        controller.rowSelectAction(t);
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
     public void businessMethod() {
-	System.out.println(xxparser.getSsessionControl() == null);
+        System.out.println(xxparser.getSsessionControl() == null);
     }
 }
