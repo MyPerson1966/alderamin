@@ -9,11 +9,6 @@ import java.io.Serializable;
 import java.util.StringTokenizer;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-
-/**
- *
- * @author User
- */
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
