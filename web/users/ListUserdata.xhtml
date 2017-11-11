@@ -59,8 +59,14 @@
 			    <h:outputText id="loginOut" value="#{u.login}"   />
 			</f:facet>
                         <f:facet name="input">
-			    
-			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField" />
+			    <h:message id="mLogin" for="loginedit" style="color:red"/> <br />
+			    <p:inputText id="loginedit" value="#{u.login}" styleClass="editField"
+					 required="true" requiredMessage="Login  is required"
+					 validatorMessage="Login Incorrect"
+					 >
+				<f:validateLength minimum="8" maximum="20" />
+				
+			    </p:inputText>
 			</f:facet>
                     </p:cellEditor>
                 </p:column>
@@ -76,7 +82,14 @@
 			    <h:outputText id="passwOut" value="#{u.password}" 
 							     />
 			</f:facet>
-                        <f:facet name="input"><p:inputText id="passwedit" value="#{u.password}" styleClass="editField" /></f:facet>
+                        <f:facet name="input">
+			    <h:message id="mPassw" for="passwedit" style="color:red"/> <br />
+			    <p:inputText id="passwedit" value="#{u.password}" styleClass="editField" 
+					 required="true" requiredMessage="Password  is required"
+					 validatorMessage="Password Incorrect">
+				<f:validateLength minimum="8" maximum="20" />
+			    </p:inputText>
+			</f:facet>
                     </p:cellEditor>
                 </p:column>
 		
@@ -91,7 +104,16 @@
 			    <h:outputText id="emailOut" value="#{u.email}" 
 							     />
 			</f:facet>
-                        <f:facet name="input"><p:inputText id="emailedit" value="#{u.email}" styleClass="editField" /></f:facet>
+                        <f:facet name="input">
+			    <h:message id="mMail" for="emailedit" style="color:red"/> <br />
+			    <p:inputText id="emailedit" value="#{u.email}" styleClass="editField"  
+					 required="true" requiredMessage="Email  is required"
+					 validatorMessage="Password Incorrect">
+	  <f:validateRegex
+		pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z0-9]{2,})$" />
+
+			    </p:inputText>
+			</f:facet>
                     </p:cellEditor>
                 </p:column>
 		
@@ -155,35 +177,38 @@
                     </p:cellEditor>
                 </p:column>
 		<!-- -->
-		<p:column headerText="INSERTED MOMENT" width="100" styleClass="tablefield"
-			  filterBy="#{u.moment}" sortBy="#{ u.moment}">
+		
+                <p:column headerText="INSERTED MOMENT &amp; COMMENT" width="140" styleClass="tablefield"
+			  filterBy="#{u.isActive}" sortBy="#{u.comment}">
 		    <f:facet name="filter">
-			
-			
-			
-			
-			
-			
-			
-			
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
-		    </f:facet>  
-		    <p:tooltip  for="momentOut" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(  u.moment)} "  trackMouse="true"  />
-		    <p:panel id="momentOut" style=" text-align: right; font-size: 10px;">
-			<h:outputText id="momentDateOut" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(u.moment)}" /><br />
-			<h:outputText id="momentTimeOut" value="#{userAdminControl.dateTimeUtil.longToSimpleTime(u.moment)}" />
+		    </f:facet>
+                    <p:cellEditor>
+                        <f:facet name="output">   
+		    <p:tooltip  for="momentOut1" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(  u.moment)} "  trackMouse="true"  />
+		    <p:panel id="momentOut1" style=" text-align: right; font-size: 10px;">
+			<h:outputText id="momentDateOut1" value="#{userAdminControl.dateTimeUtil.longToSimpleDate(u.moment)}" /><br />
+			<h:outputText id="momentTimeOut1" value="#{userAdminControl.dateTimeUtil.longToSimpleTime(u.moment)}" />
 		    </p:panel>
-                    <p:panel id="utPanel">
+                    <p:panel id="utComment">
+			<h:outputText escape="false" 
+				      value="#{ userAdminControl.htmlOutPut( u.comment) }" />
                     </p:panel>
-			
+			</f:facet>
+                        <f:facet name="input">
+			    <p:inputTextarea id="editor" value="#{u.comment}"  widgetVar="editorWidget"  width="100"      />
+			</f:facet>
+                    </p:cellEditor>
                 </p:column>
 		
-		<p:column style=" width: 25px;  #{userAdminControl.controller.user.id eq u.id  ? 'background: #ccffcc' : null }">
+		
+		<p:column style=" width: 15px;  #{userAdminControl.controller.user.id eq u.id  ? 'background: #ccffcc' : null }">
 		    <p:commandLink  value="&#9875;"    >
                         <p:ajax event="click" listener="#{userAdminControl.rowSelectAction(u)}"  
 				update="@form UserTable :msgForm:msgsInfo" />
                     </p:commandLink>
 		</p:column> 
+		
 		
 	    </p:dataTable>
 	</h:form>

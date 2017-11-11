@@ -112,4 +112,8 @@ public class UserAdminControl implements Serializable {
 	controller.rowSelectAction(u);
     }
 
+    public String htmlOutPut(String txt) {
+	return pns.utils.strings.RStrings.generateBRs(txt);
+    }
+
 }
