@@ -141,7 +141,9 @@
                                                   converter="telescopeConverter"
                                         var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
                                     <f:selectItems value="#{telescopeControl.controller.telescopeList}" 
-						   var="uts" itemLabel="#{uts}" itemValue="#{uts}" />
+					    var="uts" itemLabel="#{uts}" itemValue="#{uts}" 
+					    itemDisabled="#{userAdminControl.controller.telescopeInUse(uts) &amp;&amp; !userAdminControl.controller.telescopeInUse(uts, u) }"
+						   />
                                         <p:column  style=" width:  80%">
                                             <h:outputLabel style=" color: #008888"  value="#{t.identifier}   #{t.name}" />
                                         </p:column>

@@ -176,7 +176,7 @@
                     </p:cellEditor>
                 </p:column>
                  
-		<p:column   style=" width: 25px; #{telescopeControl.controller.telescope.identifier eq t.identifier ? 'background: #ccffcc' : null }" >
+		<p:column  headerText="IN USE"  style=" width: 25px; #{telescopeControl.userController.telescopeInUse(t) ? 'background: #bbbbbb' : null }" >
                     <h:outputLabel value="#{telescopeControl.userController.telescopeInUse(t)}" />
 		</p:column>
                  
