@@ -32,17 +32,19 @@
 			 rows="8" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,8,10,15,20,25,30,50"
 			 editable="true">
 		
-                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" update="@form:UserTable" />
-                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update="@form:UserTable  " />
+                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" update="@form:UserTable   @form:UserTable:rtEditor" />
+                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update="@form:UserTable  " />        
+		
+	
 		<f:facet name="header">
                
-		    <p:outputPanel> USERS &nbsp; &nbsp; &nbsp;
+		    <p:outputPanel> USERS &nbsp; &nbsp; &nbsp; &nbsp;
 			<h:outputText value="Search all fields:" />
 			<p:inputText id="globalFilter" styleClass="globalsearchField" onkeyup="PF('UserTable').filter()" 
 				     placeholder="Enter keyword"/>		   </p:outputPanel>
                 </f:facet>
                 
-                <p:column style="width: 15px;background: #ffffcc">
+                <p:column style="width: 15px;background: #ffffcc" >
                     <p:rowEditor   />
                 </p:column>
 		
@@ -112,7 +114,7 @@
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
 		    </f:facet>
-                    <p:cellEditor>
+                    <p:cellEditor id="rtEditor">
                         <f:facet name="output"> 
 			    <p:panel header="#{u.userType.name}">
 			    <ezcomp:rightsDeterminSet fromFOREACH="1" toFOREACH="8"
@@ -138,9 +140,10 @@
                                 <p:selectManyMenu id="advanced" style=" width:  100%" value="#{u.userTelescopeList}"
                                                   converter="telescopeConverter"
                                         var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                                    <f:selectItems value="#{telescopeControl.controller.telescopeList}" var="uts" itemLabel="#{uts}" itemValue="#{uts}" />
+                                    <f:selectItems value="#{telescopeControl.controller.telescopeList}" 
+						   var="uts" itemLabel="#{uts}" itemValue="#{uts}" />
                                         <p:column  style=" width:  80%">
-                                            <h:outputLabel style=" color: #008888"  value="#{t.name}" />
+                                            <h:outputLabel style=" color: #008888"  value="#{t.identifier}   #{t.name}" />
                                         </p:column>
                                         
                                     </p:selectManyMenu>

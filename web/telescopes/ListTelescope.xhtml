@@ -176,6 +176,10 @@
                     </p:cellEditor>
                 </p:column>
                  
+		<p:column   style=" width: 25px; #{telescopeControl.controller.telescope.identifier eq t.identifier ? 'background: #ccffcc' : null }" >
+                    <h:outputLabel value="#{telescopeControl.userController.telescopeInUse(t)}" />
+		</p:column>
+                 
 		<p:column   style=" width: 15px; #{telescopeControl.controller.telescope.identifier eq t.identifier ? 'background: #ccffcc' : null }" >
                     
                     <p:commandLink  value="&#9875;"    >
@@ -183,9 +187,6 @@
 			async="true"
 				update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo" />
                     </p:commandLink>
-                    
-                    
-                  
 		</p:column>
 		
 		

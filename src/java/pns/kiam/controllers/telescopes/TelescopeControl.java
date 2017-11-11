@@ -12,6 +12,7 @@ import org.primefaces.event.RowEditEvent;
 import pns.kiam.entities.telescopes.Telescope;
 import pns.kiam.sweb.controllers.app.XXParserSWEB;
 import pns.kiam.sweb.controllers.telescope.TelescopeController;
+import pns.kiam.sweb.controllers.user.UserController;
 
 /**
  *
@@ -23,6 +24,8 @@ public class TelescopeControl {
 
     @EJB
     private TelescopeController controller;
+    @EJB
+    private UserController userController;
 
     @EJB
     private XXParserSWEB xxparser;
@@ -33,6 +36,10 @@ public class TelescopeControl {
 
     public void setController(TelescopeController controller) {
 	this.controller = controller;
+    }
+
+    public UserController getUserController() {
+	return userController;
     }
 
     public void prepareCreation() {
