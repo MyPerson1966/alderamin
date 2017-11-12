@@ -22,20 +22,20 @@
             </p:commandLink> ||  
             <p:commandLink id="deselectTelescope" value="Deselect Telescope" disabled="#{telescopeControl.controller.telescope==null }" >
                 <p:ajax event="click" listener="#{telescopeControl.rowDeSelect()}"
-			async="true"
+			
                     update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo"
                 />
             </p:commandLink> ||  
 	    <p:commandLink value="Upload Telescope List" type="button" onclick="PF('telescopeUPL').show();" /> ||
             <p:commandLink value="Fix Uploaded Telescope data" disabled="#{!telescopeControl.controller.freshUploadComplete}" >
                 <p:ajax event="click" listener="#{telescopeControl.controller.fixAllAdded()}"
-			async="true"
+			
                     update=":TelescopeTableForm :TelescopeMaskTableForm :msgForm:msgsInfo"
                 />
             </p:commandLink>
             
             <p:dataTable id="TelescopeTable" widgetVar="TelescopeTable" value="#{telescopeControl.controller.telescopeList}" var="t" 
-			 resizableColumns="true" lazy="true"
+			 resizableColumns="true" 
 			 rows="10" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,10,15,20, 25,30"
 			 editable="true">
                 
@@ -56,7 +56,8 @@
                 <p:column style="width: 15px;background: #ffffcc">
                     <p:rowEditor  />
                 </p:column>
-                <p:column headerText="NUMBER"
+                <p:column headerText="NUMBER" 
+			  filterMatchMode="contains"
 			  filterBy="#{t.identifier}" sortBy="#{t.identifier}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
@@ -71,7 +72,9 @@
                     </p:cellEditor>
                 </p:column>
                 
-                <p:column headerText="Name" filterBy="#{t.name}" sortBy="#{t.name}">
+                <p:column headerText="Name"
+			  filterMatchMode="contains"
+			  filterBy="#{t.name}" sortBy="#{t.name}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
 		    </f:facet>
@@ -84,7 +87,9 @@
                     </p:cellEditor>
                 </p:column>
                 
-                <p:column headerText="LOCATION" filterBy="#{t.location}" sortBy="#{t.location}">
+                <p:column headerText="LOCATION"
+			  filterMatchMode="contains"
+			  filterBy="#{t.location}" sortBy="#{t.location}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
 		    </f:facet>
@@ -151,7 +156,9 @@
                     </p:cellEditor>
                 </p:column>
                 
-                <p:column headerText="DESCRIPTION" filterBy="#{t.description}">
+                <p:column headerText="DESCRIPTION"
+			  filterMatchMode="contains"
+			  filterBy="#{t.description}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
 		    </f:facet>
@@ -164,7 +171,9 @@
                     </p:cellEditor>
                 </p:column>
                 
-                <p:column headerText="COMMENT"  filterBy="#{t.comment}">
+                <p:column headerText="COMMENT" 
+			  filterMatchMode="contains"
+			  filterBy="#{t.comment}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('TelescopeTable').filter()"/>
 		    </f:facet>

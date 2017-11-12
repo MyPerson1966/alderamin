@@ -5,8 +5,10 @@
  */
 package pns.kiam.controllers.telescopes;
 
+import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import pns.kiam.entities.telescopes.Telescope;
@@ -18,11 +20,11 @@ import pns.kiam.sweb.controllers.user.UserController;
  *
  * @author PSEVO tochka
  */
-@Stateless
 @Named
-public class TelescopeControl {
+@Stateful
+public class TelescopeControl implements Serializable {
 
-    @EJB
+    @Inject
     private TelescopeController controller;
     @EJB
     private UserController userController;

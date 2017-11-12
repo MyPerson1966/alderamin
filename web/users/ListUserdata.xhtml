@@ -37,7 +37,7 @@
 	    
             
             <p:dataTable id="UserTable" widgetVar="UserTable" value="#{userAdminControl.controller.userList}" var="u" 
-			 resizableColumns="true" lazy="true"
+			 resizableColumns="true" 
 			 rows="8" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,8,10,15,20,25,30,50"
 			 editable="true">
 		
@@ -59,6 +59,7 @@
                 </p:column>
 		
                 <p:column headerText="LOGIN" width="45" styleClass="tablefield"
+			  filterMatchMode="contains"
 			  filterBy="#{u.login}" sortBy="#{u.login}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
@@ -82,6 +83,7 @@
                 </p:column>
 		
                 <p:column headerText="PASSWORD" width="45"  styleClass="tablefield"
+			  filterMatchMode="contains"
 			  filterBy="#{u.password}" sortBy="#{u.password}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
@@ -104,6 +106,7 @@
                 </p:column>
 		
                 <p:column headerText="EMAIL" width="55"  styleClass="tablefield"
+			  filterMatchMode="contains"
 			  filterBy="#{u.email}" sortBy="#{u.email}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
@@ -128,7 +131,7 @@
                 </p:column>
 		
                 <p:column headerText="IS ACTIVE" width="50" styleClass="tablefield"
-			  filterBy="#{u.isActive}" sortBy="#{u.isActive}">
+			  sortBy="#{u.isActive}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
 		    </f:facet>
@@ -173,14 +176,16 @@
 			    <p:panel header="Edit User's Telescopes">
                                 
                                 <p:selectManyMenu id="advanced" style=" width:  100%" value="#{u.userTelescopeList}"
-                                                converter="telescopeConverter"
-                                        var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                                        converter="telescopeConverter"
+                                        var="t" 
+					filter="true" filterMatchMode="contains" 
+					showCheckbox="true">
 				    
 				    <f:selectItems value="#{telescopeControl.controller.telescopeList}" 
 					    var="uts" itemLabel="#{uts}" itemValue="#{uts}" 
 					    itemDisabled="#{userAdminControl.controller.telescopeInUse(uts) &amp;&amp; !userAdminControl.controller.telescopeInUse(uts, u) }"
 					    />
-				        <p:column  style=" width:  15px">
+				        <p:column>
                                             <h:outputLabel style=" color: #008888"  value="#{t.identifier}   #{t.name}" />
                                         </p:column>
                                         
@@ -193,7 +198,7 @@
 		<!-- -->
 		
                 <p:column headerText="INSERTED MOMENT &amp; COMMENT" width="140" styleClass="tablefield"
-			  filterBy="#{u.isActive}" sortBy="#{u.comment}">
+			  filterBy="#{u.comment}" sortBy="#{u.moment}">
 		    <f:facet name="filter">
 			<h:inputText styleClass="commandField" onkeyup="PF('UserTable').filter()"/>
 		    </f:facet>
