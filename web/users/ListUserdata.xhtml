@@ -5,12 +5,18 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp">
-    <h:head>
+    <h:head id="uhead">
         <title>Facelet Title</title>
+	<script>
+        locate = function() {
+	     $( location ).attr("href", window.location.href);  
+	}
+    </script>
+	
     </h:head>
     <h:body>
         
-        <h:form id="UserTableForm">
+	<h:form id="UserTableForm">
             
         
             <p:commandLink value="Create User"  styleClass="commandbutton">
@@ -29,17 +35,19 @@
             </p:commandLink> 
 	    
 	    
-            
+            <div id="usertablediv">
             <p:dataTable id="UserTable" widgetVar="UserTable" value="#{userAdminControl.controller.userList}" var="u" 
 			 resizableColumns="true" lazy="true"
 			 rows="8" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,8,10,15,20,25,30,50"
 			 editable="true">
 		
                 <!--<p:ajax event="rowEditInit"    listener="#{userAdminControl.controller.updateUserTelescopes()}" update="@this" /> -->
-                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" update="@this " />
-                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update="@form:UserTable  " />        
+                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" 
+			 oncomplete="locate()" />
+                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" 
+			update="@this" />        
 		
-	
+		
 		<f:facet name="header">
                
 		    <p:outputPanel> USERS &nbsp; &nbsp; &nbsp; &nbsp;
@@ -174,7 +182,7 @@
 					    var="uts" itemLabel="#{uts}" itemValue="#{uts}" 
 					    itemDisabled="#{userAdminControl.controller.telescopeInUse(uts) &amp;&amp; !userAdminControl.controller.telescopeInUse(uts, u) }"
 					    />
-				        <p:column  style=" width:  80%">
+				        <p:column  style=" width:  15px">
                                             <h:outputLabel style=" color: #008888"  value="#{t.identifier}   #{t.name}" />
                                         </p:column>
                                         
@@ -219,6 +227,7 @@
 		
 		
 	    </p:dataTable>
+	    </div>
 	</h:form>
 	
 	

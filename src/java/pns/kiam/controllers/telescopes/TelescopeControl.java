@@ -6,7 +6,7 @@
 package pns.kiam.controllers.telescopes;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.inject.Named;
 import org.primefaces.event.RowEditEvent;
 import pns.kiam.entities.telescopes.Telescope;
@@ -18,7 +18,7 @@ import pns.kiam.sweb.controllers.user.UserController;
  *
  * @author PSEVO tochka
  */
-@Stateful
+@Stateless
 @Named
 public class TelescopeControl {
 
