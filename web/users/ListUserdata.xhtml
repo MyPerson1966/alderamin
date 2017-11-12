@@ -9,7 +9,7 @@
         <title>Facelet Title</title>
 	<script>
         locate = function() {
-	     $( location ).attr("href", window.location.href);  
+	    $( location ).attr("href", window.location.href);  
 	}
     </script>
 	
@@ -35,17 +35,15 @@
             </p:commandLink> 
 	    
 	    
-            <div id="usertablediv">
+            
             <p:dataTable id="UserTable" widgetVar="UserTable" value="#{userAdminControl.controller.userList}" var="u" 
 			 resizableColumns="true" lazy="true"
 			 rows="8" paginator="true" paginatorAlwaysVisible="false" pageLinks="5" rowsPerPageTemplate="5,8,10,15,20,25,30,50"
 			 editable="true">
 		
                 <!--<p:ajax event="rowEditInit"    listener="#{userAdminControl.controller.updateUserTelescopes()}" update="@this" /> -->
-                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" 
-			 oncomplete="locate()" />
-                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" 
-			update="@this" />        
+                <p:ajax event="rowEdit"   listener="#{userAdminControl.controller.onRowEdit}" update="@this " oncomplete="locate()" />
+                <p:ajax event="rowEditCancel" async="true" listener="#{userAdminControl.controller.onRowCancel}" update="@form:UserTable  " />        
 		
 		
 		<f:facet name="header">
@@ -227,7 +225,6 @@
 		
 		
 	    </p:dataTable>
-	    </div>
 	</h:form>
 	
 	
