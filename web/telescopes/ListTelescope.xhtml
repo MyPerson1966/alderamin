@@ -186,7 +186,9 @@
                 </p:column>
                  
 		<p:column  headerText="IN USE"  style=" width: 25px; #{telescopeControl.userController.telescopeInUse(t) ? 'background: #bbbbbb' : null }" >
-                    <h:outputLabel value="#{telescopeControl.userController.telescopeInUse(t)}" />
+                    
+                    <p:tooltip  for="inuseOut" value="#{telescopeControl.userController.getTelescopeOwner(t)} "  trackMouse="true" />
+                    <h:outputLabel id="inuseOut" value="#{telescopeControl.userController.telescopeInUse(t)}" />
 		</p:column>
                  
 		<p:column   style=" width: 15px; #{telescopeControl.controller.telescope.identifier eq t.identifier ? 'background: #ccffcc' : null }" >
