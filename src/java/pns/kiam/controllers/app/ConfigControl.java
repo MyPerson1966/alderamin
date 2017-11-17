@@ -27,6 +27,7 @@ import org.xml.sax.SAXException;
 import pns.FileActor;
 import pns.kiam.controllers.users.UserLoginControl;
 import pns.kiam.sweb.controllers.app.XXParserSWEB;
+import pns.kiam.sweb.controllers.satelites.FileMeasuredController;
 import pns.xmlUtils.SXParser;
 
 /**
@@ -40,12 +41,14 @@ public class ConfigControl {
     @Inject
     private UserLoginControl userLoginControl;
 
+    //private FileMeasuredController
     @EJB
     private XXParserSWEB xxparser;
 
     private String configADMLogin;
 
     private String configAdmPassword;
+    private String archivePath = "";
 
     /**
      * Get the value of configAdmPassword
@@ -79,6 +82,9 @@ public class ConfigControl {
             xxparser.build();
             configADMLogin = xxparser.getLogin();
             configAdmPassword = xxparser.getPassword();
+            archivePath = xxparser.getArchivePath();
+            System.out.println("   -------->> " + archivePath + "   " + xxparser.getArchivePath());
+            xxparser.getFileMeasuredController().readArchiveFileDir();
 
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(ConfigControl.class.getName()).log(Level.SEVERE, null, ex);
