@@ -167,7 +167,7 @@
 			    <h:selectOneMenu id="rght" value="#{u.userType.id}" style="width:80%" required="true"
 					     requiredMessage="User Rights required"
 					     >
-				<f:selectItem itemLabel="Select User's Rights" itemValue="" noSelectionOption="true" />
+				<f:selectItem itemLabel="--Select User's Rights--" itemValue="" noSelectionOption="true" />
                 
 				<f:selectItems value="#{userTypeControl.controller.userTypeList}" var="ut" 
 					       itemLabel="#{ut.name} " itemValue="#{ut.id}" />
