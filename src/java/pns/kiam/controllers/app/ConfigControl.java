@@ -83,7 +83,7 @@ public class ConfigControl {
             configADMLogin = xxparser.getLogin();
             configAdmPassword = xxparser.getPassword();
             archivePath = xxparser.getArchivePath();
-            System.out.println("   -------->> " + archivePath + "   " + xxparser.getArchivePath());
+            //System.out.println("   -------->> " + archivePath + "   " + xxparser.getArchivePath());
             xxparser.getFileMeasuredController().readArchiveFileDir();
 
         } catch (ParserConfigurationException ex) {
