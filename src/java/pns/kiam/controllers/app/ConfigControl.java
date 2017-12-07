@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
-import pns.FileActor;
+import pns.FileActora;
 import pns.kiam.controllers.users.UserLoginControl;
 import pns.kiam.sweb.controllers.app.XXParserSWEB;
 import pns.xmlUtils.SXParser;
