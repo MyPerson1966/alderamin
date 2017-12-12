@@ -13,6 +13,7 @@
 
 
             <ui:define id="cont" name="content">
+                
                 <c:if test="#{userLoginControl.loginned &amp;&amp; userLoginControl.currUser.userType.rights>=240}" >  
                    <ui:include src="/telescopes/ListTelescope.xhtml" />
                 </c:if>

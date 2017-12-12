@@ -18,10 +18,12 @@
 	    
                 <c:if test="#{userLoginControl.loginned &amp;&amp; userLoginControl.currUser.userType.rights>=240}" >
                 <p:menuitem value="Telescopes" outcome="#{menuControl.navigste('/telescopes/telescopedata') }"
-			
 			async="true"
 			icon="ui-icon-document"></p:menuitem>
-	    <p:menuitem value="Users Docs"  outcome="#{menuControl.navigste('/users/userdata' )}"
+        	
+                <p:menuitem value="Measured Files" outcome="#{menuControl.navigste('/satellites/filedata') }"
+			async="true"
+			icon="ui-icon-document"></p:menuitem><p:menuitem value="Users Docs"  outcome="#{menuControl.navigste('/users/userdata' )}"
 			async="true"
 			 ></p:menuitem>
                 </c:if>
