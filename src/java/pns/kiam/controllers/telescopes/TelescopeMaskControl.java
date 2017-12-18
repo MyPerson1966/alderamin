@@ -29,19 +29,19 @@ public class TelescopeMaskControl {
 //        controller = new TelescopeMaskController();
 //    }
     public TelescopeMaskController getController() {
-	return controller;
+        return controller;
     }
 
     public void setController(TelescopeMaskController controller) {
-	this.controller = controller;
+        this.controller = controller;
     }
 
     public void prepareCreation() {
-	controller.prepareCreation();
+        controller.prepareCreation();
     }
 
     public void rowDeSelect() {
-	controller.rowDeSelect();
+        controller.rowDeSelect();
     }
 
     /**
@@ -50,7 +50,7 @@ public class TelescopeMaskControl {
      * @param event
      */
     public void onRowEdit(RowEditEvent event) {
-	controller.onRowEdit(event);
+        controller.onRowEdit(event);
     }
 
     /**
@@ -61,15 +61,15 @@ public class TelescopeMaskControl {
      * @param all
      */
     public void removeRow(boolean all) {
-	controller.removeRow(all);
+        controller.removeRow(all);
     }
 
     public void rowSelect(SelectEvent event) {
-	controller.rowSelect(event);
+        controller.rowSelect(event);
     }
 
     public void rowSelectAction(TelescopeHorizontMask t) {
-	controller.rowSelectAction(t);
+        controller.rowSelectAction(t);
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

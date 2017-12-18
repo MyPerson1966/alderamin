@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pns.kiam.controllers.users;
 
 import java.io.Serializable;
@@ -36,35 +31,35 @@ public class UserAdminControl implements Serializable {
     }
 
     public UserController getController() {
-	return controller;
+        return controller;
     }
 
     public void setController(UserController controller) {
-	this.controller = controller;
+        this.controller = controller;
     }
 
     public void generateRNDPW() {
-	String pass = pns.utils.strings.RStrings.rndLetterStringRNDLen(9, 14, 10, true, false);
-	String logg = pns.utils.strings.RStrings.rndLetterStringRNDLen(9, 14, 10, true, false);
-	if (controller.getUser() != null) {
-	    controller.getUser().setLogin(logg);
-	    controller.getUser().setPassword(pass);
-	}
+        String pass = pns.utils.strings.RStrings.rndLetterStringRNDLen(9, 14, 10, true, false);
+        String logg = pns.utils.strings.RStrings.rndLetterStringRNDLen(9, 14, 10, true, false);
+        if (controller.getUser() != null) {
+            controller.getUser().setLogin(logg);
+            controller.getUser().setPassword(pass);
+        }
     }
 
     /**
      * Prepare to create user
      */
     public void prepareCreation() {
-	controller.prepareCreation();
+        controller.prepareCreation();
     }
 
     public DateTimeUtil getDateTimeUtil() {
-	return dateTimeUtil;
+        return dateTimeUtil;
     }
 
     public void rowDeSelect() {
-	controller.rowDeSelect();
+        controller.rowDeSelect();
     }
 
     /**
@@ -73,7 +68,7 @@ public class UserAdminControl implements Serializable {
      * @param event
      */
     public void onRowEdit(RowEditEvent event) {
-	controller.onRowEdit(event);
+        controller.onRowEdit(event);
     }
 
     /**
@@ -84,7 +79,7 @@ public class UserAdminControl implements Serializable {
      * @param all
      */
     public void removeRow(boolean all) {
-	controller.removeRow(all);
+        controller.removeRow(all);
     }
 
     /**
@@ -93,14 +88,14 @@ public class UserAdminControl implements Serializable {
      * @param event
      */
     public void onRowCancel(RowEditEvent event) {
-	controller.onRowCancel(event);
+        controller.onRowCancel(event);
     }
 
     /**
      * Row Select action
      */
     public void rowSelect(SelectEvent event) {
-	controller.rowSelect(event);
+        controller.rowSelect(event);
     }
 
     /**
@@ -109,15 +104,15 @@ public class UserAdminControl implements Serializable {
      * @param t
      */
     public void rowSelectAction(User u) {
-	controller.rowSelectAction(u);
+        controller.rowSelectAction(u);
     }
 
     public void telescopeSelectionActionListener() {
-	System.out.println("    LIS   uuuu");
+        System.out.println("    LIS   uuuu");
     }
 
     public String htmlOutPut(String txt) {
-	return pns.utils.strings.RStrings.generateBRs(txt);
+        return pns.utils.strings.RStrings.generateBRs(txt);
     }
 
 }
