@@ -15,10 +15,8 @@
 	
     </h:head>
     <h:body>
-        <h2>#{userAdminControl==null}</h2>
-	<h:form id="UserTableForm">
-            
-        
+        <h1>#{userTypeControl==null}</h1>
+        <h:form id="UserTableForm">
             <p:commandLink value="Create User"  styleClass="commandbutton">
                 
 		<p:ajax event="click" listener="#{userAdminControl.prepareCreation()}"
