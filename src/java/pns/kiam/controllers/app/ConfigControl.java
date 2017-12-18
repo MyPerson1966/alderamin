@@ -6,28 +6,28 @@
 package pns.kiam.controllers.app;
 
 import java.io.IOException;
-import java.io.Serializable;
-import java.util.Date;
+//import java.io.Serializable;
+//import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.ejb.Stateful;
+//import javax.ejb.Singleton;
+//import javax.ejb.Startup;
+//import javax.ejb.Stateful;
 import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.application.Application;
-import javax.faces.application.NavigationHandler;
+//import javax.enterprise.context.SessionScoped;
+//import javax.faces.application.Application;
+//import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
-import pns.FileActor;
+//import pns.fileUtils.FileActor;
 import pns.kiam.controllers.users.UserLoginControl;
 import pns.kiam.sweb.controllers.app.XXParserSWEB;
-import pns.xmlUtils.SXParser;
+//import pns.xmlUtils.SXParser;
 
 /**
  *
