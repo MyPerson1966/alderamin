@@ -40,7 +40,6 @@ public class ConfigControl {
     @Inject
     private UserLoginControl userLoginControl;
 
-    //private FileMeasuredController
     @EJB
     private XXParserSWEB xxparser;
 
